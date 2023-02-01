@@ -70,11 +70,11 @@ React.js & MASL application requires following configuration
    ```js
    const msalInstance = new PublicClientApplication({  
    auth: {  
-        //auth config  
+        //auth config  
    }, cache: {  
-        cacheLocation: "localStorage",   
+        cacheLocation: "localStorage",   
    }, system: {  
-        allowRedirectInIframe: true  
+        allowRedirectInIframe: true  
    }})
    ```
 2. **Logout endpoint** – application needs to provide a logout endpoint, at the URL corresponding with Azure AD B2C registration. React.js framework is not natively prepared for handleing routing, however uisng React-router, it is possible to serve specific content on */logout* endpoint. Using *BrowserRouter* component, */logout* request can be routed to specific application component.
@@ -92,16 +92,16 @@ React.js & MASL application requires following configuration
    import { useMsal } from "@azure/msal-react"; 
     
    export function Logout() { 
-       const { instance } = useMsal(); 
+       const { instance } = useMsal(); 
     
-       instance.logoutRedirect({ 
-           account: instance.getActiveAccount(), 
-           onRedirectNavigate: false 
-       }); 
+       instance.logoutRedirect({ 
+           account: instance.getActiveAccount(), 
+           onRedirectNavigate: false 
+       }); 
     
-       return ( 
-           <div>Logout</div> 
-       ) 
+       return ( 
+           <div>Logout</div> 
+       ) 
    }    
    ```
    Setting *onRedirectNavigate: false* ensures that only local logout will be performed. Once onRedirectNavigate is set to true, local logout is followed by calling */logout* endpoint of Azure AD B2C. Since Logout component is loaded as a result of other application call to Azure AD B2C */logout* endpoint, calling it once again will only extend the time needed to accomplish original request. 
