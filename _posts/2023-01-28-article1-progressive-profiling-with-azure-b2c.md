@@ -76,6 +76,7 @@ Below diagram shows the concept of UserJourney that incorporates progressive pro
 * **PPCounter** – used to count user sign-in actions. Once counter reaches specific value, progressive profiling form should be displayed to the user after signing-in. Next PPCounter is reset. It is saved in AD user attributes, so value is preserved between UserJourney executions. 
 * **PPShouldExecute** – determines if PPCounter reaches specific level after which progressive profiling form should be displayed to the user. In given example PPShouldExecute is set once PPCounter equals 3. It means user is asked to fill progressive profiling form after every 3rd sign-in. 
 * **PPExecuted** – indicates that progressive profiling information was already gathered from user in current UserJourney. It helps to prevent from asking user for multiple information in single UserJourney execution.
+
 ---
 
 ![Azure AD B2C login 2](/assets/img/article1/b2c-progressive-profiling-user-journey.png)
