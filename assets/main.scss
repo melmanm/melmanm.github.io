@@ -1,0 +1,9 @@
+@import "minima";
+// Add logo to masthead
+.site-title::before {
+    content: url("img/ogo.png");
+    display: inline-block;
+    position: relative;
+    width: 37px;
+    top: 5px;
+}
