@@ -30,8 +30,8 @@ Progressive profiling is a way to ask these questions gradually as trust to webs
 
 ## Progressive Profiling implementation using Azure AD B2C 
 Azure AD B2C allows to incorporate progressive profiling into sign-in process. It is possible to customize sign-in process and extend it with gathering and processing additional user’s input. 
-![Azure AD B2C login 1](../assets/img/article1/azure-b2c-progressive-profiling-diagram-1.png)
-![Azure AD B2C login 2](../assets/img/article1/azure-b2c-progressive-profiling-diagram-2.png)
+![Azure AD B2C login 1](/assets/img/article1/azure-b2c-progressive-profiling-diagram-1.png)
+![Azure AD B2C login 2](/assets/img/article1/azure-b2c-progressive-profiling-diagram-2.png)
 
 Provided information can be stored in Azure AD B2C tenant and served within id_token. Having preferences as a part of user identity enables personalization of application services. OAuth 2.0 OpenId token can be extended with progressive profiling information as follows: 
 ![Azure AD B2C login 2](../assets/img/article1/azure-b2c-open-id-token.jpg)
