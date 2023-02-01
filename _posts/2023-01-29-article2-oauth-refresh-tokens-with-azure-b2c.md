@@ -19,7 +19,7 @@ categories: misc
 - [Customizing refresh token flow](#customizing-refresh-token-flow)
 
 ## Introduction
-Refresh tokens are commonly used in OAuth based authorization scenarios. The purpose of refresh token is to retrieve new id or access token from authorization server without user interaction. In simple scenarios once access token expires user is forced and reauthenticate to Auth server to get new token. Using refresh tokens approach, expired access token can be replaced with fresh one in the background, without user interaction. 
+Refresh tokens are commonly used in OAuth based authorization scenarios. The purpose of refresh token is to retrieve new id/access token from authorization server, without user interaction. In simple scenarios once access token expires user is forced and reauthenticate to Auth server to get new token. Using refresh tokens approach, expired access token can be replaced with fresh one in the background, without user interaction. 
 
 Using refresh token improves application security. One might think it would be just enough to extend an expiration time of id/access token. By making it long lived, user avoids often reauthentication. This approach may put your application at greater risk of token being intercepted and used by attacker. 
 
