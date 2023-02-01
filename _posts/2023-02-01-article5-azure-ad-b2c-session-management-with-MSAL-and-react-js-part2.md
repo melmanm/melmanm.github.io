@@ -82,7 +82,7 @@ React.js & MASL application requires following configuration
    <BrowserRouter>
        <Routes>
            <Route path="/logout" element={<Logout />} />
-           <Route path="/" element={< Home />} />
+           <Route path="/" element={<Home />} />
        </Routes>
    </BrowserRouter>
    ```
