@@ -91,7 +91,7 @@ async ssoSilent(request: SsoSilentRequest): Promise<AuthenticationResult> {
       const silentIframeClient = this.createSilentIframeClient(validRequest.correlationId); 
       result = silentIframeClient.acquireToken(validRequest); 
       //... 
-} 
+}
 ```
 
 *There is alternative way to silently call authorize endpoint is to use WAM (Web Assembly Manager) widely described in [MSAL.js docs](https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-browser/docs/device-bound-tokens.md). At the time this article is created WAM, is supported by Azure AD, but there is not support for Azure AD B2C*. 
