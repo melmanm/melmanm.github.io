@@ -20,7 +20,7 @@ categories: misc
 
 
 ## Introduction
-In [previous article](article3-openid-connect-session-management.md) I described session management possibilities provided by OpenId Connect.  
+In [previous article](https://melmanm.github.io/misc/2023/01/30/article3-openid-connect-session-management.html) I described session management possibilities provided by OpenId Connect.  
 
 OpenId Connect session is a way to maintain the context of logged in user across Applications, running on user device, and Identity Provider Server. Vast majority of modern web application works in the context of logged-in user. OAuth-based solutions delegates identity management to external Identity Provider Server. From application perspective it is important to be synchronized with Identity Provider and be able to react on user session events. It becomes even more relevant if multiple applications operate in the context of the same user session (SSO solutions).  
 
@@ -86,11 +86,11 @@ Below there is a fragment of MSAL.js core implementation related with *ssoSilent
 
 ```js
 async ssoSilent(request: SsoSilentRequest): Promise<AuthenticationResult> { 
-  const correlationId = this.getRequestCorrelationId(request); 
-      //... 
-      const silentIframeClient = this.createSilentIframeClient(validRequest.correlationId); 
-      result = silentIframeClient.acquireToken(validRequest); 
-      //... 
+ const correlationId = this.getRequestCorrelationId(request); 
+   //... 
+ const silentIframeClient = this.createSilentIframeClient(validRequest.correlationId); 
+ result = silentIframeClient.acquireToken(validRequest); 
+ //... 
 }
 ```
 
@@ -110,22 +110,21 @@ This exception is however very useful and can be used as an indication of user s
 
 ```js
 const callSsoSilent = async () => { 
-    try { 
-        await instance.ssoSilent(silentRequest); 
+  try { 
+    await instance.ssoSilent(silentRequest); 
  
- 
-    } catch (e) { 
-        if (e instanceof InteractionRequiredAuthError) { 
-            instance.logoutRedirect({ 
-                account: instance.getActiveAccount(), 
-                //prevents from notifying a server about logout, logout is performed only locally - in applicaiton scpoe 
-                onRedirectNavigate: false 
-            }); 
-        } 
-        else{ 
-            //handling of other error 
-        } 
-    } 
+  } catch (e) { 
+    if (e instanceof InteractionRequiredAuthError) { 
+      instance.logoutRedirect({ 
+        account: instance.getActiveAccount(), 
+        //prevents from notifying a server about logout, logout is performed only locally - in applicaiton scpoe 
+        onRedirectNavigate: false 
+      }); 
+    } 
+    else{ 
+      //handling of other error 
+    } 
+  } 
 } 
 ```
 ### Third party cookies
