@@ -34,13 +34,13 @@ Azure AD B2C allows to incorporate progressive profiling into sign-in process. I
 ![Azure AD B2C login 2](/assets/img/article1/azure-b2c-progressive-profiling-diagram-2.png)
 
 Provided information can be stored in Azure AD B2C tenant and served within id_token. Having preferences as a part of user identity enables personalization of application services. OAuth 2.0 OpenId token can be extended with progressive profiling information as follows: 
-![Azure AD B2C login 2](../assets/img/article1/azure-b2c-open-id-token.jpg)
+![Azure AD B2C login 2](/assets/img/article1/azure-b2c-open-id-token.jpg)
 
 Azure AD B2C provides two ways of configuring identity related flows.
 * **User flows** - predefined, build-in policies designed to handle most common scenarios; can be configured within Azure Portal UI. 
 * **Identity Experience Framework (Custom Policies)** - Configuration of identity-related processes like sign-in, sign-up, reset password or profile edit is called policy. Policies are defined in xml files. Xml-based policies are flexible and can be highly customized.
 
-![Azure AD B2C login 2](../assets/img/article1/azure-b2c-policies.jpg)
+![Azure AD B2C login 2](/assets/img/article1/azure-b2c-policies.jpg)
 
 Progressive profiling scenario is not supported by user flows and needs to be implemented using Identity Experience Framework. **TrustFrameworkPolicy*** is top-level xml element of policy file. It defines claims schema, claims transformation, token generation steps and more. It is well described on https://learn.microsoft.com/en-us/azure/active-directory-b2c/trustframeworkpolicy.  
 
@@ -66,7 +66,7 @@ Additionally, my repository contains xml files with custom progressive profilin
 * **ProgressiveProfileSignUpOrSignin.xml**(B2C_1A_ProgressiveProfile_SignUpOrSignIn policy) defines RelyingParty which returns final token claims. 
 
 Policies can be inherited. Inheritance allows to use or extend elements defined in parent policies. Following diagram presents inheritance of policies in this implementation: 
-![Azure AD B2C login 2](../assets/img/article1/b2c-progressive-profiling-policies-inheritance.png)
+![Azure AD B2C login 2](/assets/img/article1/b2c-progressive-profiling-policies-inheritance.png)
 
 Below diagram shows the concept of UserJourney that incorporates progressive profiling into user sign-in flow. 
 
@@ -78,7 +78,7 @@ Below diagram shows the concept of UserJourney that incorporates progressive pro
 * **PPExecuted** – indicates that progressive profiling information was already gathered from user in current UserJourney. It helps to prevent from asking user for multiple information in single UserJourney execution.
 ---
 
-![Azure AD B2C login 2](../assets/img/article1/b2c-progressive-profiling-user-journey.png)
+![Azure AD B2C login 2](/assets/img/article1/b2c-progressive-profiling-user-journey.png)
 
 **Step 1** utilizes base self-asserted technical profile which displays sign-in form in the browser.  Once user fills email and password *SelfAsserted-LocalAccountSignin-Email* credentials are validated by executing ROPC (Resource Owner Password Credentials) flow. ROPC flow gets user access token form https://login.microsoftonline.com/{tenant}/oauth2/token endpoint. Received token indludes *objectId* attribute, which identifies user in AD tenant.
 
