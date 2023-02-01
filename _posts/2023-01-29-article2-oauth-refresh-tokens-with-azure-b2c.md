@@ -7,16 +7,16 @@ categories: misc
 # OAuth refresh tokens with Azure AD B2C
 
 ## Table of contents
-- [Introduction](#-introduction-)
-- [Refreshing tokens by the book](#-refreshing-tokens-by-the-book-)
-- [Refresh tokens settings in Azure AD B2C](#-refresh-tokens-settings-in-azure-ad-b2c--)
-    - [User Flows](#-user-flows-)
-    - [Custom Policies](#-custom-policies-)
-- [Refresh token revocation](#-refresh-token-revocation-)
-    - [Revocation and access tokens](#-revocation-and-access-tokens-)
-    - [Azure AD B2C revocation scenarios](#-azure-ad-b2c-revocation-scenarios-)
-    - [One time use refresh token](#-one-time-use-refresh-token--)
-- [Customizing refresh token flow](#-customizing-refresh-token-flow--)
+- [Introduction](#introduction)
+- [Refreshing tokens by the book](#refreshing-tokens-by-the-book)
+- [Refresh tokens settings in Azure AD B2C](#refresh-tokens-settings-in-azure-ad-b2c)
+    - [User Flows](#user-flows)
+    - [Custom Policies](#custom-policies)
+- [Refresh token revocation](#refresh-token-revocation)
+    - [Revocation and access tokens](#revocation-and-access-tokens)
+    - [Azure AD B2C revocation scenarios](#azure-ad-b2c-revocation-scenarios)
+    - [One time use refresh token](#one-time-use-refresh-token)
+- [Customizing refresh token flow](#customizing-refresh-token-flow)
 
 ## Introduction
 Refresh tokens are commonly used in OAuth based authorization scenarios. The purpose of refresh token is to retrieve new id or access token from authorization server without user interaction. In simple scenarios once access token expires user is forced and reauthenticate to Auth server to get new token. Using refresh tokens approach, expired access token can be replaced with fresh one in the background, without user interaction. 
