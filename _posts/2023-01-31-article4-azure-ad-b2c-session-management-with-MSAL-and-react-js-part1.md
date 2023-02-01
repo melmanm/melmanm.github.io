@@ -7,16 +7,16 @@ categories: misc
 # Azure AD B2C session management with MSAL and React.js - Part 1.
 
 ## Table of contents
-- [Introduction](#-introduction-)
-- [MSAL](#-msal-)
-- [SSO- Single sign-on and Single sign-out](#-sso--single-sign-on-and-single-sign-out--)
-- [Azure AD B2C supported session management methods](#-azure-ad-b2c-supported-session-management-methods--)
-- [/authorize endpoint polling](#-authorize-endpoint-polling-)
-  - [User Experience](#-user-experience--)
-  - [React to session expiration](#-react-to-session-expiration-)
-  - [Third party cookies](#-third-party-cookies-)
-  - [Azure AD B2C API rate limits](#-azure-ad-b2c-api-rate-limits-)
-- [To be continued](#-to-be-continued-)
+- [Introduction](#introduction)
+- [MSAL](#msal)
+- [SSO- Single sign-on and Single sign-out](#sso--single-sign-on-and-single-sign-out)
+- [Azure AD B2C supported session management methods](#azure-ad-b2c-supported-session-management-methods)
+- [/authorize endpoint polling](#authorize-endpoint-polling)
+  - [User Experience](#user-experience-)
+  - [React to session expiration](#react-to-session-expiration)
+  - [Third party cookies](#third-party-cookies)
+  - [Azure AD B2C API rate limits](#azure-ad-b2c-api-rate-limits)
+- [To be continued](#to-be-continued)
 
 
 ## Introduction

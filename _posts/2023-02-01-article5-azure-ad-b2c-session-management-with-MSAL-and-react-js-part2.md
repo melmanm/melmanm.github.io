@@ -7,19 +7,17 @@ categories: misc
 # Azure AD B2C session management with MSAL and React.js - Part 2.
 
 ## Table of contents
-- [Introduction](#-introduction-)
-- [Front-channel logout](#-front-channel-logout-)
-- [Configuration of Azure AD B2C](#-configuration-of-azure-ad-b2c--)
-- [MSAL and React.js configuration](#-msal-and-reactjs-configuration-)
-- [Third Party LocalStorage Access](#third-party-localstorage-access--)
+- [Introduction](#introduction-
+- [Front-channel logout](#front-channel-logout)
+- [Configuration of Azure AD B2C](#configuration-of-azure-ad-b2c)
+- [MSAL and React.js configuration](#msal-and-reactjs-configuration)
+- [Third party LocalStorage access](#third-party-localstorage-access)
 
 
 ## Introduction
-This article continues the topic of session management In Azure AD B2C. [Previous post](/_posts/2023-01-31-article4-azure-ad-b2c-session-management-with-MSAL-and-react-js-part1.md) outlined application’s polling-based approach to determine session status in SSO scope. Today I will focus on **front-channel logout**.  
+This article continues the topic of session management In Azure AD B2C. [Previous post](2023-01-31-article4-azure-ad-b2c-session-management-with-MSAL-and-react-js-part1.md) outlined application’s polling-based approach to determine session status in SSO scope. Today I will focus on **front-channel logout**.  
 
 As the article goal is to inspect session management from application perspective, I will refer to the code samples. Code samples originate from to React.js SPA application, supported by MSAL.js library.
-
-Full application code is available on GitHub https://github.com/melmanm/react-js-azure-b2c-session-management-sample.
 
 ---
 *Full application code is available on my [GitHub](https://github.com/melmanm/react-js-azure-b2c-session-management-sample).*  
@@ -113,7 +111,7 @@ React.js & MASL application requires following configuration
    ```
    **Handling storage events is also critical in the context of front-channel logout**. After application’s */logout* endpoint is called by Azure AD B2C iframe, user context is removed from localStorage. Application that is open in user browser has to be notified about this change and refresh its status. 
 
-##Third Party LocalStorage Access 
+## Third party LocalStorage access 
 Application logout endpoint, loaded from Azure AD B2C iframe, needs to access localStorage. Unless Azure AD B2C is configured using [Azure Front Door](https://learn.microsoft.com/en-us/azure/active-directory-b2c/custom-domain?pivots=b2c-custom-policy), to be available from the same domain as application, it can lead to some difficulties.
 
 Some browsers, controls localStorage access using the third-party cookies settings. Once it is disabled, localStorage cannot be accessed from website iframed in a different domain. Since more and more browsers restricts cross domain access to storage, it needs to be considered.
