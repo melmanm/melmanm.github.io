@@ -7,10 +7,10 @@ categories: misc
 # Progressive Profiling with Azure AD B2C
 
 ## Table of contents
-- [Introduction](#-introduction--)
-- [The concept of Progressive Profiling](#-the-concept-of-progressive-profiling-)
-- [Progressive Profiling implementation using Azure AD B2C](#-progressive-profiling-implementation-using-azure-ad-b2c--)
-- [Progressive Profiling UserJourney - Custom Policy implementation](#-progressive-profiling-userjourney---custom-policy-implementation--)
+- [Introduction](#introduction)
+- [The concept of Progressive Profiling](#the-concept-of-progressive-profiling)
+- [Progressive Profiling implementation using Azure AD B2C](#progressive-profiling-implementation-using-azure-ad-b2c)
+- [Progressive Profiling UserJourney - Custom Policy implementation](#progressive-profiling-userjourney---custom-policy-implementation)
 
 ## Introduction 
 Azure AD B2C provides advanced tools for user identity and access management. Modern applications often delegate identity and access management to external service. At the same time authorization and authentication needs to be highly flexible providing features as: 

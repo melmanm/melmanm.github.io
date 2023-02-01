@@ -20,7 +20,7 @@ categories: misc
 
 
 ## Introduction
-In previous [article](/_posts/2023-01-30-article3-openid-connect-session-management.md) I described session management possibilities provided by OpenId Connect.  
+In [previous article](/2023-01-30-article3-openid-connect-session-management.md) I described session management possibilities provided by OpenId Connect.  
 
 OpenId Connect session is a way to maintain the context of logged in user across Applications, running on user device, and Identity Provider Server. Vast majority of modern web application works in the context of logged-in user. OAuth-based solutions delegates identity management to external Identity Provider Server. From application perspective it is important to be synchronized with Identity Provider and be able to react on user session events. It becomes even more relevant if multiple applications operate in the context of the same user session (SSO solutions).  
 
