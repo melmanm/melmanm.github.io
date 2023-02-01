@@ -7,7 +7,7 @@ categories: misc
 # Azure AD B2C session management with MSAL and React.js - Part 2.
 
 ## Table of contents
-- [Introduction](#introduction-
+- [Introduction](#introduction)
 - [Front-channel logout](#front-channel-logout)
 - [Configuration of Azure AD B2C](#configuration-of-azure-ad-b2c)
 - [MSAL and React.js configuration](#msal-and-reactjs-configuration)
