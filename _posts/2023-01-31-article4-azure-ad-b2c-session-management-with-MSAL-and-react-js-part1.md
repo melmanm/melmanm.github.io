@@ -3,6 +3,7 @@ layout: post
 title: "Azure AD B2C session management with MSAL and React.js - Part 1."
 categories: misc
 ---
+
 # Azure AD B2C session management with MSAL and React.js - Part 1.
 
 ## Table of contents

@@ -3,6 +3,7 @@ layout: post
 title: "Progressive profiling with Azure AD B2C"
 categories: misc
 ---
+
 # Progressive Profiling with Azure AD B2C
 
 ## Table of contents
