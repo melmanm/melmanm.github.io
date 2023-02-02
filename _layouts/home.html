@@ -31,8 +31,8 @@ layout: default
             {{ post.title | escape }}
           </a>
         </h3>
-        {% if post.cover-img != "" %}
-        <div class="post-image post-image-short">
+        {% if post.cover-img %}
+        <div class="post-image">
           <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
             <img src="{{ post.cover-img | absolute_url }}" alt="Post thumbnail">
           </a>
