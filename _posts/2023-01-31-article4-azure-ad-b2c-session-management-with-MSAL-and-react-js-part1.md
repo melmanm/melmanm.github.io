@@ -2,11 +2,15 @@
 layout: post
 title: "Azure AD B2C session management with MSAL and React.js - Part 1."
 categories: misc
+tags:
+- Azure AD B2C
+- Custom Policy
+- Authentication
+- OpenId Connect
+- React.js
 ---
 
-In [previous article](https://melmanm.github.io/misc/2023/01/30/article3-openid-connect-session-management.html) I described session management possibilities provided by OpenId Connect.  
-
-OpenId Connect session is a way to maintain the context of logged in user across Applications, running on user device, and Identity Provider Server. Vast majority of modern web application works in the context of logged-in user. OAuth-based solutions delegates identity management to external Identity Provider Server. From application perspective it is important to be synchronized with Identity Provider and be able to react on user session events. It becomes even more relevant if multiple applications operate in the context of the same user session (SSO solutions).  
+In [previous article](https://melmanm.github.io/misc/2023/01/30/article3-openid-connect-session-management.html) I described session management possibilities provided by OpenId Connect. OpenId Connect session is a way to maintain the context of logged in user across Applications, running on user device, and Identity Provider Server. Vast majority of modern web application works in the context of logged-in user. OAuth-based solutions delegates identity management to external Identity Provider Server. From application perspective it is important to be synchronized with Identity Provider and be able to react on user session events. It becomes even more relevant if multiple applications operate in the context of the same user session (SSO solutions).  
 
 In this article I will describe Azure AD B2C-specific approach to session management in SSO environment. As the article goal is to inspect session management from developer perspective, I will refer to the code samples. Code samples originate from to React.js SPA application, supported by MSAL.js library.
 

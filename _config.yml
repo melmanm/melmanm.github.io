@@ -1,3 +1,4 @@
 theme: minima
 title: Michał Silski's blog
 show_excerpts: true
+feed_show_tags: true

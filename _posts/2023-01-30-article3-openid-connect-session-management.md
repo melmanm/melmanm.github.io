@@ -2,6 +2,9 @@
 layout: post
 title: "OpenId Connect Session Management"
 categories: misc
+tags:
+- OpenId Connect
+- OAuth 2.0
 ---
 
 OpenId Connect session is a way to maintain the context of logged in user across Applications running on user device and Identity Provider Server.  Maintaining user session, depending on implementation, improves user experience by 

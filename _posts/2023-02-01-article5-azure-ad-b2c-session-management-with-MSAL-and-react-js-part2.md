@@ -2,6 +2,12 @@
 layout: post
 title: "Azure AD B2C session management with MSAL and React.js - Part 2."
 categories: misc
+tags:
+- Azure AD B2C
+- Custom Policy
+- Authentication
+- OpenId Connect
+- React.js
 ---
 
 This article continues the topic of session management In Azure AD B2C. [Previous post](https://melmanm.github.io/misc/2023/01/31/article4-azure-ad-b2c-session-management-with-MSAL-and-react-js-part1.html) outlined application’s polling-based approach to determine session status in SSO scope. Today I will focus on **front-channel logout**.  
