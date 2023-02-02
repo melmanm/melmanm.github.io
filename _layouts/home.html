@@ -31,6 +31,13 @@ layout: default
             {{ post.title | escape }}
           </a>
         </h3>
+        {% if cover-img != "" %}
+        <div class="post-image post-image-small">
+          <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
+            <img src="{{ cover-img | absolute_url }}" alt="Post thumbnail">
+          </a>
+        </div>
+        {% endif %}
         <div class="post-entry">
           {% assign excerpt_length = site.excerpt_length | default: 50 %}
           {{ post.excerpt | strip_html | xml_escape | truncatewords: excerpt_length }}

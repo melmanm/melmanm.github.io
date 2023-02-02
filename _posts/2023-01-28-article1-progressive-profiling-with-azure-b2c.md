@@ -7,6 +7,8 @@ tags:
 - Custom-Policy
 - Authentication
 - OpenIdConnect
+cover-img: /assets/img/article1/cover.png
+share-img: /assets/img/article1/cover.png
 ---
 Azure AD B2C provides advanced tools for user identity and access management. Modern applications often delegate identity and access management to external service. At the same time authorization and authentication needs to be highly flexible providing features as: 
 * Integration with external identity providers like GitHub or Facebook etc. 
