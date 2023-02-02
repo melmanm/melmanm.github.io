@@ -41,10 +41,6 @@
 }
 @media (max-width: 767px) {
   .post-image {
-    height: 9rem;
-    width: 9rem;
-  }
-  .post-image {
-    margin-top: 0;
+    display: none; 
   }
 }

@@ -31,6 +31,7 @@ layout: default
             {{ post.title | escape }}
           </a>
         </h3>
+        <div>
         {% if post.cover-img %}
         <div class="post-image">
           <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
@@ -45,6 +46,7 @@ layout: default
           {% if post.content != post.excerpt or excerpt_word_count > excerpt_length %}
             <a href="{{ post.url | absolute_url }}" class="post-read-more">[Read&nbsp;More]</a>
           {% endif %}
+        </div>
         </div>
         {% if site.feed_show_tags != false and post.tags.size > 0 %}
         <div class="blog-tags">
