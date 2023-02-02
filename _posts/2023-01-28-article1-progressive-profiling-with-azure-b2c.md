@@ -2,6 +2,11 @@
 layout: post
 title: "Progressive profiling with Azure AD B2C"
 categories: misc
+tags:
+- Azure-AD-B2C
+- Custom-Policy
+- Authentication
+- OpenIdConnect
 ---
 Azure AD B2C provides advanced tools for user identity and access management. Modern applications often delegate identity and access management to external service. At the same time authorization and authentication needs to be highly flexible providing features as: 
 * Integration with external identity providers like GitHub or Facebook etc. 

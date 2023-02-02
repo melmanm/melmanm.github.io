@@ -3,10 +3,10 @@ layout: post
 title: "Azure AD B2C session management with MSAL and React.js - Part 1."
 categories: misc
 tags:
-- Azure AD B2C
-- Custom Policy
+- Azure-AD-B2C
+- Custom-Policy
 - Authentication
-- OpenId Connect
+- OpenId-Connect
 - React.js
 ---
 
