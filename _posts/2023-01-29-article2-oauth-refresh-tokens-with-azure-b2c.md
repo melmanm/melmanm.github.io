@@ -131,7 +131,9 @@ This functionality gives variety of possibilities, for example
 
 * Refresh user claims in returned id token using Azure AD, or other identity provider data. Some claims might have changed after they were initially generated during sign in process. 
 * Call external API to check if user, who is trying to refresh the token, is on some backlist. Interrupt token generation if that is the case. 
-* Check if user’s refresh token was revoked. 
+* Check if user’s refresh token was revoked.
+
+In example below, I will present how to incorporate revoked session check into refresh token flow.
 
 After requesting */token* endpoint with *grant_type=refresh_token* Azure AD B2C triggers *UserJourney* which is specified in *RelyingParty* as an Endpoint with *Id=Token*.  
 ```xml

@@ -71,7 +71,7 @@ Policies can be inherited. Inheritance allows to use or extend elements defined 
 Below diagram shows the concept of UserJourney that incorporates progressive profiling into user sign-in flow. 
 
 ---
-*Presented UserJourney uses several custom claims, to control, gathering progressive profiling information*
+*Presented UserJourney uses several custom claims, to control progressive profiling UserJourney*
 
 * **PPCounter** – used to count user sign-in actions. Once counter reaches specific value, progressive profiling form should be displayed to the user after signing-in. Next PPCounter is reset. It is saved in AD user attributes, so value is preserved between UserJourney executions. 
 * **PPShouldExecute** – determines if PPCounter reaches specific level after which progressive profiling form should be displayed to the user. In given example PPShouldExecute is set once PPCounter equals 3. It means user is asked to fill progressive profiling form after every 3rd sign-in. 
