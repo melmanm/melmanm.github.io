@@ -23,8 +23,8 @@
 .post-image {
   float: right;
   margin-left: 0.625rem;
-  height: 12rem;
-  width: 12rem;
+  height: 10rem;
+  width: 10rem;
 }
 .post-image {
   filter: grayscale(60%);
@@ -36,9 +36,7 @@
   max-height: 100%;
   max-width: 100%;
 }
-.post-image {
-  margin-top: -2.1875rem;
-}
+
 @media (max-width: 767px) {
   .post-image {
     display: none; 
