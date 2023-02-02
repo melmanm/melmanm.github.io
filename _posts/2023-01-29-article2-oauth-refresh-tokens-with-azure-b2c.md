@@ -4,21 +4,6 @@ title: "OAuth refresh tokens with Azure AD B2C"
 categories: misc
 ---
 
-# OAuth refresh tokens with Azure AD B2C
-
-## Table of contents
-- [Introduction](#introduction)
-- [Refreshing tokens by the book](#refreshing-tokens-by-the-book)
-- [Refresh tokens settings in Azure AD B2C](#refresh-tokens-settings-in-azure-ad-b2c)
-    - [User Flows](#user-flows)
-    - [Custom Policies](#custom-policies)
-- [Refresh token revocation](#refresh-token-revocation)
-    - [Revocation and access tokens](#revocation-and-access-tokens)
-    - [Azure AD B2C revocation scenarios](#azure-ad-b2c-revocation-scenarios)
-    - [One time use refresh token](#one-time-use-refresh-token)
-- [Customizing refresh token flow](#customizing-refresh-token-flow)
-
-## Introduction
 Refresh tokens are commonly used in OAuth based authorization scenarios. The purpose of refresh token is to retrieve new id/access token from authorization server, without user interaction. In simple scenarios once access token expires user is forced and reauthenticate to Auth server to get new token. Using refresh tokens approach, expired access token can be replaced with fresh one in the background, without user interaction. 
 
 Using refresh token improves application security. One might think it would be just enough to extend an expiration time of id/access token. By making it long lived, user avoids often reauthentication. This approach may put your application at greater risk of token being intercepted and used by attacker. 
@@ -30,6 +15,17 @@ Once id/access token is retrieved from Auth server, it can be used until it expi
 With short-lived access token, risk of its interception still exists, however their maliciues usage can be minimized as they shortly expire and cannot be used against resource server anymore. In Azure AD B2C default access token lifetime is 60 minutes and can be configured in a range of 5 minutes to 24 hours. 
 
 Besides external risks long-lived access tokens, expose resources to internal risks. Once user access scope to specific resource is changed or revoked by Auth server administrator, it will be reflected in access token generated after this change. With long lived access tokens user might keep the access to the resource for long time after it was changed or revoked. 
+
+## Table of contents
+- [Refreshing tokens by the book](#refreshing-tokens-by-the-book)
+- [Refresh tokens settings in Azure AD B2C](#refresh-tokens-settings-in-azure-ad-b2c)
+    - [User Flows](#user-flows)
+    - [Custom Policies](#custom-policies)
+- [Refresh token revocation](#refresh-token-revocation)
+    - [Revocation and access tokens](#revocation-and-access-tokens)
+    - [Azure AD B2C revocation scenarios](#azure-ad-b2c-revocation-scenarios)
+    - [One time use refresh token](#one-time-use-refresh-token)
+- [Customizing refresh token flow](#customizing-refresh-token-flow)
 
 ## Refreshing tokens by the book
 Below diagram presents how refresh token can be used in Authorization Code Grant flow. 

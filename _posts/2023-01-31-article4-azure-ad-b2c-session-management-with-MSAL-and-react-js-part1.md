@@ -4,22 +4,6 @@ title: "Azure AD B2C session management with MSAL and React.js - Part 1."
 categories: misc
 ---
 
-# Azure AD B2C session management with MSAL and React.js - Part 1.
-
-## Table of contents
-- [Introduction](#introduction)
-- [MSAL](#msal)
-- [SSO- Single sign-on and Single sign-out](#sso--single-sign-on-and-single-sign-out)
-- [Azure AD B2C supported session management methods](#azure-ad-b2c-supported-session-management-methods)
-- [/authorize endpoint polling](#authorize-endpoint-polling)
-  - [User Experience](#user-experience-)
-  - [React to session expiration](#react-to-session-expiration)
-  - [Third party cookies](#third-party-cookies)
-  - [Azure AD B2C API rate limits](#azure-ad-b2c-api-rate-limits)
-- [To be continued](#to-be-continued)
-
-
-## Introduction
 In [previous article](https://melmanm.github.io/misc/2023/01/30/article3-openid-connect-session-management.html) I described session management possibilities provided by OpenId Connect.  
 
 OpenId Connect session is a way to maintain the context of logged in user across Applications, running on user device, and Identity Provider Server. Vast majority of modern web application works in the context of logged-in user. OAuth-based solutions delegates identity management to external Identity Provider Server. From application perspective it is important to be synchronized with Identity Provider and be able to react on user session events. It becomes even more relevant if multiple applications operate in the context of the same user session (SSO solutions).  
@@ -30,6 +14,17 @@ In this article I will describe Azure AD B2C-specific approach to session manage
 *Full application code is available on my [GitHub](https://github.com/melmanm/react-js-azure-b2c-session-management-sample).*  
 
 ---
+
+## Table of contents
+- [MSAL](#msal)
+- [SSO- Single sign-on and Single sign-out](#sso--single-sign-on-and-single-sign-out)
+- [Azure AD B2C supported session management methods](#azure-ad-b2c-supported-session-management-methods)
+- [/authorize endpoint polling](#authorize-endpoint-polling)
+  - [User Experience](#user-experience-)
+  - [React to session expiration](#react-to-session-expiration)
+  - [Third party cookies](#third-party-cookies)
+  - [Azure AD B2C API rate limits](#azure-ad-b2c-api-rate-limits)
+- [To be continued](#to-be-continued)
 
 ## MSAL
 MSAL (Microsoft Authentication Library) is an open-source library, which enables developers to utilize OAuth 2.0 based services like Azure AD or Azure AD B2C. MSAL provides a set of functions designed to run specific OAuth 2.0 flows and acquire tokens. MSAL helps with application user management, by supporting login, logout, edit profile or change password user flows. MASL provides user context to the application using browser storage. It enables applications to maintain their own user-related cookies layer. 

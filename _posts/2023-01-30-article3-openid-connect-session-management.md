@@ -4,22 +4,6 @@ title: "OpenId Connect Session Management"
 categories: misc
 ---
 
-# OpenId Connect Session Management
-
-## Table of contents
-- [Introduction](#introduction)
-- [Terminology](#terminology)
-- [Determining session status](#determining-session-status)
-  - [Polling Based Solutions](#polling-based-solutions)
-    - [check_session_iframe endpoint](#check_session_iframe-endpoint)
-    - [/authorize endpoint polling](#authorize-endpoint-polling)
-  - [Logout Based Solutions](#logout-based-solutions)
-    - [Front-Channel Logout](#front-channel-logout)
-    - [Back-Channel Logout](#back-channel-logout)
-
-<!-- /code_chunk_output -->
-
-## Introduction 
 OpenId Connect session is a way to maintain the context of logged in user across Applications running on user device and Identity Provider Server.  Maintaining user session, depending on implementation, improves user experience by 
 
 * **Avoiding frequent authentication** – As long as there is active session available, application can acquire fresh access/id tokens from Identity Provider Server without user being ask to enter credentials. 
@@ -30,6 +14,19 @@ OpenId Connect session is a way to maintain the context of logged in user across
 Additionally, Identity Provider servers usually provides administrator option to revoke all user 	sessions. It can be used if user device was lost or stolen to protect against unauthorized access 	and malicious usage. 
 
 In this article I will describe how applications determines user session status, considering SSO scenarios. I will focus on methods provided by OpenId Connect. For applications which requires custom solutions, described methods can be used as a foundation. 
+
+
+## Table of contents
+- [Terminology](#terminology)
+- [Determining session status](#determining-session-status)
+  - [Polling Based Solutions](#polling-based-solutions)
+    - [check_session_iframe endpoint](#check_session_iframe-endpoint)
+    - [/authorize endpoint polling](#authorize-endpoint-polling)
+  - [Logout Based Solutions](#logout-based-solutions)
+    - [Front-Channel Logout](#front-channel-logout)
+    - [Back-Channel Logout](#back-channel-logout)
+
+<!-- /code_chunk_output -->
 
 ## Terminology
 To keep this article consistent, I will use following naming for OpenId Connect parties 

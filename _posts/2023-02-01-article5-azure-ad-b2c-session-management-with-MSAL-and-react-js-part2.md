@@ -4,17 +4,6 @@ title: "Azure AD B2C session management with MSAL and React.js - Part 2."
 categories: misc
 ---
 
-# Azure AD B2C session management with MSAL and React.js - Part 2.
-
-## Table of contents
-- [Introduction](#introduction)
-- [Front-channel logout](#front-channel-logout)
-- [Configuration of Azure AD B2C](#configuration-of-azure-ad-b2c)
-- [MSAL and React.js configuration](#msal-and-reactjs-configuration)
-- [Third party LocalStorage access](#third-party-localstorage-access)
-
-
-## Introduction
 This article continues the topic of session management In Azure AD B2C. [Previous post](https://melmanm.github.io/misc/2023/01/31/article4-azure-ad-b2c-session-management-with-MSAL-and-react-js-part1.html) outlined application’s polling-based approach to determine session status in SSO scope. Today I will focus on **front-channel logout**.  
 
 As the article goal is to inspect session management from application perspective, I will refer to the code samples. Code samples originate from to React.js SPA application, supported by MSAL.js library.
@@ -23,6 +12,13 @@ As the article goal is to inspect session management from application perspectiv
 *Full application code is available on my [GitHub](https://github.com/melmanm/react-js-azure-b2c-session-management-sample).*  
 
 ---
+
+## Table of contents
+- [Front-channel logout](#front-channel-logout)
+- [Configuration of Azure AD B2C](#configuration-of-azure-ad-b2c)
+- [MSAL and React.js configuration](#msal-and-reactjs-configuration)
+- [Third party LocalStorage access](#third-party-localstorage-access)
+
 
 ## Front-channel logout
 Front-channel logout idea is based on user logout notification, broadcasted by Azure AD B2C to all applications sharing the same user session. Usually, in response to the notification, application drops current user context and redirect user to login page (to indicate reauthentication is required).

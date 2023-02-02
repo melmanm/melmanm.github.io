@@ -14,7 +14,6 @@ Azure AD B2C supports all these scenarios and even more. In this article I will 
 Progressive Profiling is a gradual way of collecting user preferences. As application collects user’s preferences it can provide more personalized, better suited experience.
 
 ## Table of contents
-- [Introduction](#introduction)
 - [The concept of Progressive Profiling](#the-concept-of-progressive-profiling)
 - [Progressive Profiling implementation using Azure AD B2C](#progressive-profiling-implementation-using-azure-ad-b2c)
 - [Progressive Profiling UserJourney - Custom Policy implementation](#progressive-profiling-userjourney---custom-policy-implementation)
