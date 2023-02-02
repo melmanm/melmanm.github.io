@@ -5,6 +5,9 @@ categories: misc
 tags:
 - Azure-AD-B2C
 - OpenId-Connect
+cover-img: /assets/img/article1/cover.png
+thumbnail-img: /assets/img/article1/cover.png
+share-img: /assets/img/article1/cover.png
 ---
 
 Refresh tokens are commonly used in OAuth based authorization scenarios. The purpose of refresh token is to retrieve new id/access token from authorization server, without user interaction. In simple scenarios once access token expires user is forced and reauthenticate to Auth server to get new token. Using refresh tokens approach, expired access token can be replaced with fresh one in the background, without user interaction. 
