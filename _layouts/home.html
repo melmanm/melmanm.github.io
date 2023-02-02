@@ -34,7 +34,7 @@ layout: default
         {% if cover-img != "" %}
         <div class="post-image post-image-small">
           <a href="{{ post.url | absolute_url }}" aria-label="Thumbnail">
-            <img src="{{ cover-img | absolute_url }}" alt="Post thumbnail">
+            <img src="{{ post.cover-img | absolute_url }}" alt="Post thumbnail">
           </a>
         </div>
         {% endif %}
