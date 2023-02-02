@@ -3,16 +3,6 @@ layout: post
 title: "Progressive profiling with Azure AD B2C"
 categories: misc
 ---
-
-# Progressive Profiling with Azure AD B2C
-
-## Table of contents
-- [Introduction](#introduction)
-- [The concept of Progressive Profiling](#the-concept-of-progressive-profiling)
-- [Progressive Profiling implementation using Azure AD B2C](#progressive-profiling-implementation-using-azure-ad-b2c)
-- [Progressive Profiling UserJourney - Custom Policy implementation](#progressive-profiling-userjourney---custom-policy-implementation)
-
-## Introduction 
 Azure AD B2C provides advanced tools for user identity and access management. Modern applications often delegate identity and access management to external service. At the same time authorization and authentication needs to be highly flexible providing features as: 
 * Integration with external identity providers like GitHub or Facebook etc. 
 * Customization of user experience during sign-in, sign-up, profile edit etc. 
@@ -22,6 +12,13 @@ Azure AD B2C provides advanced tools for user identity and access management. Mo
 Azure AD B2C supports all these scenarios and even more. In this article I will focus on progressive profiling implementation, taking advantage from Azure AD B2C support for highly customized user experience.  
 
 Progressive Profiling is a gradual way of collecting user preferences. As application collects user’s preferences it can provide more personalized, better suited experience.
+
+## Table of contents
+- [Introduction](#introduction)
+- [The concept of Progressive Profiling](#the-concept-of-progressive-profiling)
+- [Progressive Profiling implementation using Azure AD B2C](#progressive-profiling-implementation-using-azure-ad-b2c)
+- [Progressive Profiling UserJourney - Custom Policy implementation](#progressive-profiling-userjourney---custom-policy-implementation)
+
 
 ## The concept of Progressive Profiling
 Imagine user is singing-up for gym website. User is asked to fill standard sign-up form including email and name. Gym website added personalized training offer recently. In result, during sign-up process, user is additionaly asked about favorite exercises, training preferences, age, calories eaten per day, health condition and past training record. At this point user would probably resign from signing-in. The main reason could be user doesn’t trust the website yet so to share such detailed information.  
