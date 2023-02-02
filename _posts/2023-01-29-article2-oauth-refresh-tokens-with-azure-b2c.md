@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OAuth refresh tokens with Azure AD B2C"
+title: "OAuth 2.0 refresh tokens with Azure AD B2C"
 categories: misc
 tags:
 - Azure-AD-B2C
