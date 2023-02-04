@@ -152,5 +152,5 @@ Back-Channel Logout is described in [OpenId Connect documentation](https://openi
 
 Once all RPs are notified IdP redirects user to *post_logout_redirect_uri*. 
 
-Not all IdP server providers supports Back-Channel logout. If Back-Channel is supported, *backchannel_logout_supported* property is visible in IdP discovery endpoint. 
+Not all IdP server providers supports Back-Channel logout. If Back-Channel is supported, *backchannel_logout_supported* property is visible in IdP discovery endpoint.
 
