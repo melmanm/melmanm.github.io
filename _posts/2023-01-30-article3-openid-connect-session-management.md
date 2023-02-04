@@ -16,7 +16,7 @@ Session, in the context of OpenId Connect, is a way to maintain the context of l
 * **Synchronizing user context across applications** - From application perspective it is important to know if it works in the context of logged-in user or not. Since identity management is delegated to Identity Provider Server, it is important for the application to be synchronized with Identity Provider and be able to react on user session events. It becomes challenging, in SSO scenarios, where multiple applications, use the same user session. Some actions like user logout, password reset or users account deletion requires all other applications using current session to be informed.  
 Additionally, Identity Provider servers usually provides administrator option to revoke all user 	sessions. It can be used if user device was lost or stolen to protect against unauthorized access 	and malicious usage. 
 
-In this article I will describe how applications determine user session status, considering SSO scenarios. I will focus on methods provided by OpenId Connect. For applications which requires custom solutions, described methods can be used as a foundation. 
+In this article I will describe how applications determine user session status, considering SSO scenarios. I will focus on methods provided by OpenId Connect. For applications requiring custom solutions, described methods can be used as a foundation. 
 
 
 ## Table of contents
