@@ -16,7 +16,7 @@ Session, in the context of OpenId Connect, is a way to maintain the context of l
 * **Synchronizing user context across applications** - From application perspective it is important to know if it works in the context of logged-in user or not. Since identity management is delegated to Identity Provider Server, it is important for the application to be synchronized with Identity Provider and be able to react on user session events. It becomes challenging, in SSO scenarios, where multiple applications, use the same user session. Some actions like user logout, password reset or users account deletion requires all other applications using current session to be informed.  
 Additionally, Identity Provider servers usually provides administrator option to revoke all user 	sessions. It can be used if user device was lost or stolen to protect against unauthorized access 	and malicious usage. 
 
-In this article I will describe how applications determines user session status, considering SSO scenarios. I will focus on methods provided by OpenId Connect. For applications which requires custom solutions, described methods can be used as a foundation. 
+In this article I will describe how applications determine user session status, considering SSO scenarios. I will focus on methods provided by OpenId Connect. For applications which requires custom solutions, described methods can be used as a foundation. 
 
 
 ## Table of contents
@@ -43,10 +43,10 @@ additionally
 ***SSO scope*** – all RP’s which utilize the same user session. 
 
 ## Determining session status
-Knowledge of session status is critical for RPs. Applications which usually provide different functionalities depending if running in the context of logged-in user or not. Below solutions are a way for RP to determine current session status. 
+Knowledge of session status is critical for RPs. Applications usually provide different functionalities depending if running in the context of logged-in user or not. Below solutions enables RP to determine current session status. 
 
 ### Polling Based Solutions 
-Polling is a way to determine a status of an asset, by actively, cyclically, checking its value. In the context of OpenId Connect and session management polling solutions are based on cyclic requests to IdP to gather latest user session status.
+Polling, in general, is a way to determine a status of an asset, by actively, cyclically, checking its value. In the context of OpenId Connect and session management, polling solutions are based on cyclic requests to IdP to gather latest user session status.
 
 ### check_session_iframe endpoint 
 *check_session_iframe* endpoint is described in [OpenId Connect Session-related specs](https://openid.net/specs/openid-connect-session-1_0.html). It requires RP to load IdP code, which validates current session state.  
