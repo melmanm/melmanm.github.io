@@ -14,11 +14,11 @@ Azure AD B2C provides advanced tools for user identity and access management. Mo
 * Integration with external identity providers like GitHub or Facebook etc. 
 * Customization of user experience during sign-in, sign-up, profile edit etc. 
 * Extension of user identity with application-specific information 
-* Incorporate custom services/API calls into authorization or authentication flow
+* Performing calls to external APIs during authorization or authentication
 
-Azure AD B2C supports all these scenarios and even more. In this article I will focus on progressive profiling implementation, taking advantage from Azure AD B2C support for highly customized user experience.  
+Azure AD B2C supports all these scenarios and even more. In this article I will focus on progressive profiling implementation, taking advantage of Azure AD B2C support for highly customized user experience.  
 
-Progressive Profiling is a gradual way of collecting user preferences. As application collects user’s preferences it can provide more personalized, better suited experience.
+**Progressive Profiling** is a gradual way of collecting user preferences. As application collects user’s preferences it can provide more personalized, better suited experience.
 
 ## Table of contents
 - [The concept of Progressive Profiling](#the-concept-of-progressive-profiling)
@@ -27,16 +27,18 @@ Progressive Profiling is a gradual way of collecting user preferences. As applic
 
 
 ## The concept of Progressive Profiling
-Imagine user is singing-up for gym website. User is asked to fill standard sign-up form including email and name. Gym website added personalized training offer recently. In result, during sign-up process, user is additionally asked about favorite exercises, training preferences, age, calories eaten per day, health condition and past training record. At this point user would probably resign from signing-in. The main reason could be user doesn’t trust the website yet so to share such detailed information.  
+Imagine user is singing-up for gym website. User is asked to fill in standard sign-up form, including email and username. Gym website added personalized training offer recently. In result, during sign-up process, user is additionally asked about favorite exercises, training preferences, age, calories eaten per day, health condition and past training record. At this point most of potential customers would probably resign from signing-up. The main reason is they don't trust the website yet, to share such detailed information.  
 
-Progressive profiling is a way to ask these questions gradually as trust to website increases and personalization benefits are observed by user. Let's assume user signs-up to the website with minimum information required. After several visits on the website, during log-in process, user is informed about personalized training offer and asked to choose favorite exercise from the list. This question can be not answered, however after few visits on the website and maybe on the gym itself, there is a better chance this information will be provided. As users observe benefits form personalization, they become more eager to share their preferences.
+Progressive profiling is a way to ask these questions gradually, as trust to the website (and company) increases and user observes benefits of personalization. Let's assume user signs-up to the website with minimum information required. After several visits during sign-in process, user is informed about personalized training offer and asked to choose favorite exercise from the list. This question can be not answered, however after few visits on the website and maybe on the gym itself, there is a better chance this information will be shared. As users observe benefits form personalization, they become more eager to share their preferences.
 
 ## Progressive Profiling implementation using Azure AD B2C 
 Azure AD B2C allows to incorporate progressive profiling into sign-in process. It is possible to customize sign-in process and extend it with gathering and processing additional user’s input. 
 ![Azure AD B2C login 1](/assets/img/article1/azure-b2c-progressive-profiling-diagram-1.png)
 ![Azure AD B2C login 2](/assets/img/article1/azure-b2c-progressive-profiling-diagram-2.png)
 
-Provided information can be stored in Azure AD B2C tenant and served within id_token. Having preferences as a part of user identity enables personalization of application services. OAuth 2.0 OpenId token can be extended with progressive profiling information as follows: 
+Provided information can be stored in Azure AD B2C tenant and served within id_token. Having preferences as a part of user identity enables application to personalize data it provides. 
+
+*id_token* token can be extended with progressive profiling information as follows: 
 ![Azure AD B2C login 2](/assets/img/article1/azure-b2c-open-id-token.jpg)
 
 Azure AD B2C provides two ways of configuring identity related flows.
@@ -47,11 +49,15 @@ Azure AD B2C provides two ways of configuring identity related flows.
 
 Progressive profiling scenario is not supported by user flows and needs to be implemented using Identity Experience Framework. **TrustFrameworkPolicy*** is top-level xml element of policy file. It defines claims schema, claims transformation, token generation steps and more. It is well described on https://learn.microsoft.com/en-us/azure/active-directory-b2c/trustframeworkpolicy.  
 
-**TrustFrameworkPolicy** uses concept of UserJourneys. **UserJourney** includes steps (Orchestration Steps) needs to be taken to perform identity related actions like sign-in or sign-up. In the context of signing-in, the result of UserJourney is generated id_token.
+**TrustFrameworkPolicy** uses concept of UserJourneys. **UserJourney** includes steps (Orchestration Steps), needs to be taken to perform identity related actions like sign-in or sign-up. In the context of signing-in, the result of UserJourney is generated id_token.
 
-**OrchestrationSteps** process claims using TechnicalProfiles. **TechnicalProfiles** generates output claims based on input claims by interacting with AD, calling external API, gathering data from user, etc. TechnicalProfiles are connected together in a chain by Orchestration Steps, creating UserJourney.
+**OrchestrationSteps** process claims using TechnicalProfiles. **TechnicalProfiles** generates output claims based on input claims by interacting with AD, calling external API, gathering data from user, etc. TechnicalProfiles are connected together in a chain by OrchestrationSteps, creating UserJourney.
 
-UserJourney starts when OAuth 2.0 flow is initiated (in most cases by calling corresponding /authorize endpoint). Once all UserJourney steps are finished, user is redirected to *RedirectUrl* with generated token. RedirectedUrl can be configured in Azure AD B2C tenant for registered application. 
+UserJourney starts when OAuth 2.0 flow is initiated (in most cases by calling corresponding /authorize endpoint). 
+
+Result *id_token* is passed to *RedirectUrl* once application requests a token. RedirectedUrl can be configured in Azure AD B2C tenant for registered application. 
+
+*Note: Using implicit grant flow /authorize endpoint call, which initiates authentication, is considered as the token request at the same time*
 
 ## Progressive Profiling UserJourney - Custom Policy implementation 
 The concept solution of progressive profiling policy is available on my [GitHub](https://github.com/melmanm/azure-b2c-custom-policy-progressive-profiling). 
@@ -62,7 +68,7 @@ Repository contains following files implementing policies
 * TrustFrameworkExtensions.xml (B2C_1A_TrustFrameworkExtensions policy) 
 
 These files originate from [Azure custom policy samples repository](https://github.com/Azure-Samples/active-directory-b2c-custom-policy-starterpack). They are recommended as a foundation for building custom policies. 
-Additionally, my repository contains xml files with custom progressive profiling policy implementation. 
+Additionally, my repository contains xml files, which implements custom progressive profiling policy. 
 
 * **ProgressiveProfileTrustFrameworkBase.xml**(B2C_1A_ ProgressiveProfile_TrustFrameworkBase policy) defines base claims and technical profile to handle progressive profiling, exchange claims with AAD and handle user input. 
 * **ProgressiveProfileTrustFrameworkExtensions.xml** (B2C_1A_ ProgressiveProfile_TrustFrameworkExtensions policy) defines application-specific claims which will be gathered from user in progressive profiling flow. It implements UserJourney. 
