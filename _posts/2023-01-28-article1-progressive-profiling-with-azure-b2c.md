@@ -10,7 +10,7 @@ tags:
 cover-img: /assets/img/article1/cover.png
 share-img: /assets/img/article1/cover.png
 ---
-Azure AD B2C provides advanced tools for user identity and access management. Modern applications often delegate identity and access management to external service. At the same time authorization and authentication needs to be highly flexible providing features as: 
+Azure AD B2C provides advanced tools for user identity and access management. Modern applications often delegate identity and access management to external services. At the same time authorization and authentication needs to be highly flexible providing features as: 
 * Integration with external identity providers like GitHub or Facebook etc. 
 * Customization of user experience during sign-in, sign-up, profile edit etc. 
 * Extension of user identity with application-specific information 
@@ -109,10 +109,10 @@ Below diagram shows the concept of UserJourney that incorporates progressive pro
         </OutputClaimsTransformations>
     </TechnicalProfile>  
     ```
-    
-    *PPCounter* claim is read from AD. If it does not exist its value is set to 0. Additionaly, two output claims transformations are executed:  
+
+    *PPCounter* claim is read from AD. If it does not exist its value is set to 0. Additionally, two output claims transformations are executed:  
     *PPCounter* claim is incremented 
-    
+
     ```xml
     <ClaimsTransformation Id="IncrementProgressiveProfileCounter" TransformationMethod="AdjustNumber">
         <InputClaims>
@@ -125,10 +125,10 @@ Below diagram shows the concept of UserJourney that incorporates progressive pro
             <OutputClaim ClaimTypeReferenceId="extension_PPCounter" TransformationClaimType="outputClaim" />
         </OutputClaims>
     </ClaimsTransformation> 
-    
+
     ``` 
     *PPShouldExecute* claim is added and set to *true* when *PPCounter* equals 3. **It enables progressive profiling prompt on every third log-in** 
-    
+
     ```xml
     <ClaimsTransformation Id="SetProgressiveProfilingShouldExecute" TransformationMethod="AssertNumber">
         <InputClaims>
