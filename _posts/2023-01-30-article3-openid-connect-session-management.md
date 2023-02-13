@@ -9,9 +9,9 @@ tags:
 
 Session, in the context of OpenId Connect, is a way to maintain the context of logged in user across Applications and Identity Provider Server. Maintaining user session can improve user experience by 
 
-* **Avoiding frequent authentication** – As long as there is active session available, application can acquire fresh access/id tokens from Identity Provider Server, without user being ask to re-enter credentials. 
+* **Avoiding frequent authentication** – As long as there is active session available, application can acquire fresh access/id tokens from Identity Provider Server, without user being asked to re-enter credentials. 
 
-* **Enabling Single sign-on (SSO)** - SSO enables reusing the same user session across multiple applications launched in the same web browser and working under the same Identity Provider Server. Once user logs-in into single application, other applications, from the same suite or family, can be used without user being ask to re-authenticate. 
+* **Enabling Single sign-on (SSO)** - SSO enables reusing the same user session across multiple applications launched in the same web browser and working under the same Identity Provider Server. Once user logs-in into single application, other applications, from the same suite or family, can be used, without user being asked to re-authenticate. 
 
 * **Synchronizing user context across applications** - From application perspective it is important to know if it works in the context of logged-in user or not. Since identity management is delegated to Identity Provider Server, it is important for the application to be synchronized with Identity Provider and be able to react on user session events. It becomes challenging, in SSO scenarios, where multiple applications, use the same user session. Some actions like user logout, password reset or users account deletion requires all other applications using current session to be informed.  
 Additionally, Identity Provider servers usually provides administrator option to revoke all user 	sessions. It can be used if user device was lost or stolen to protect against unauthorized access 	and malicious usage. 
