@@ -64,6 +64,7 @@ To enable front-channel logout in Azure AD B2C, following steps needs to be done
        <SingleSignOn Scope="Tenant" EnforceIdTokenHintOnLogout="true"/> 
    </UserJourneyBehaviors> 
    ```
+
 ## MSAL and React.js configuration
 React.js & MASL application requires following configuration 
 1. **MSAL configuration** – MSAL configuration is expressed in JSON format. It is used to instantiate MASL application instance.
