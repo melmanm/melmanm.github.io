@@ -6,5 +6,4 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 #
 layout: home
-google_site_verification: 3lmLmzW6dcrWdh5CfLl0tcpp4k5ThWGP9E9BOlfsz2Y
 ---
