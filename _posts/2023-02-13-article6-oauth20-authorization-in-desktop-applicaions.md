@@ -5,6 +5,7 @@ categories: misc
 tags:
 - OAuth 2.0
 - Authorization
+cover-img: /assets/img/article6/system-browser-flow.png
 ---
 
 In this article I will describe concepts of integration desktop applications with OAuth 2.0 compliant authorization serves. Thanks to OAuth 2.0 flexibility, it is possible to perform authorization on many platforms, including Desktop. This article focuses on authorizing to OAuth 2.0 servers on user’s behalf. 
