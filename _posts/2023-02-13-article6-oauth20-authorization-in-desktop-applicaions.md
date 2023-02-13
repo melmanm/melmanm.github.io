@@ -3,7 +3,7 @@ layout: post
 title: "OAuth 2.0 authorization in desktop applications"
 categories: misc
 tags:
-- OAuth 2.0
+- OAuth2.0
 - Authorization
 cover-img: /assets/img/article6/system-browser-flow.png
 ---
