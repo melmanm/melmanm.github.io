@@ -27,16 +27,16 @@ Azure AD B2C supports all these scenarios and even more. In this article I will 
 
 
 ## The concept of Progressive Profiling
-Imagine user is singing-up for gym website. User is asked to fill in standard sign-up form, including email and username. Gym website added personalized training offer recently. In result, during sign-up process, user is additionally asked about favorite exercises, training preferences, age, calories eaten per day, health condition and past training record. At this point most of potential customers would probably resign from signing-up. The main reason is they don't trust the website yet, to share such detailed information.  
+Imagine user is singing-up for gym website. User is asked to fill in standard sign-up form, including email and username. Gym website added personalized training offer recently. In result, during sign-up process, user is additionally asked about favorite exercises, training preferences, age, calories eaten per day, health condition and past training record. At this point most of potential customers would probably resign from signing-up. The main reason is most likely users don't trust the website yet to share such detailed information.  
 
-Progressive profiling is a way to ask these questions gradually, as trust to the website (and company) increases and user observes benefits of personalization. Let's assume user signs-up to the website with minimum information required. After several visits during sign-in process, user is informed about personalized training offer and asked to choose favorite exercise from the list. This question can be not answered, however after few visits on the website and maybe on the gym itself, there is a better chance this information will be shared. As users observe benefits form personalization, they become more eager to share their preferences.
+Progressive profiling is a way to ask these questions gradually, as trust to the website (and company) increases and user observes benefits of personalization. Let's assume user signs-up with minimum information required. After several visits, during next sign-in process, user is informed about personalized training offer and asked to choose favorite exercise from the list. This question can be not answered, however after few visits on the website and maybe on the gym itself, there is a better chance this information will be shared. As users observe benefits form personalization, they become more eager to share their preferences.
 
 ## Progressive Profiling implementation using Azure AD B2C 
 Azure AD B2C allows to incorporate progressive profiling into sign-in process. It is possible to customize sign-in process and extend it with gathering and processing additional user’s input. 
 ![Azure AD B2C login 1](/assets/img/article1/azure-b2c-progressive-profiling-diagram-1.png)
 ![Azure AD B2C login 2](/assets/img/article1/azure-b2c-progressive-profiling-diagram-2.png)
 
-Provided information can be stored in Azure AD B2C tenant and served within id_token. Having preferences as a part of user identity enables application to personalize data it provides. 
+Provided information can be stored in Azure AD B2C tenant and served within id_token. Having preferences as a part of user identity enables application to personalize services it provides. 
 
 *id_token* token can be extended with progressive profiling information as follows: 
 ![Azure AD B2C login 2](/assets/img/article1/azure-b2c-open-id-token.jpg)
