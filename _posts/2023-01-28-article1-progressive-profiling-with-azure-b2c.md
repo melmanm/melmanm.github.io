@@ -98,60 +98,65 @@ Below diagram shows the concept of UserJourney that incorporates progressive pro
 
 1. B2C_1A_ ProgressiveProfile_TrustFrameworkBase
 
- ```xml
- <TechnicalProfile Id="AAD-UserReadUsingObjectId">
-     <OutputClaims>
-         <OutputClaim ClaimTypeReferenceId="extension_PPCounter" DefaultValue="0"/>
-     </OutputClaims>
-     <OutputClaimsTransformations>
-         <OutputClaimsTransformation ReferenceId="IncrementProgressiveProfileCounter" />
-         <OutputClaimsTransformation ReferenceId="SetProgressiveProfilingShouldExecute" />
-     </OutputClaimsTransformations>
- </TechnicalProfile>  
- ```
- *PPCounter* claim is read from AD. If it does not exist its value is set to 0. Additionaly, two output claims transformations are executed:  
- *PPCounter* claim is incremented 
- ```xml
- <ClaimsTransformation Id="IncrementProgressiveProfileCounter" TransformationMethod="AdjustNumber">
-     <InputClaims>
-         <InputClaim ClaimTypeReferenceId="extension_PPCounter" TransformationClaimType="inputClaim" />
-     </InputClaims>
-     <InputParameters>
-         <InputParameter Id="Operator" DataType="string" Value="INCREMENT" />
-     </InputParameters>
-     <OutputClaims>
-         <OutputClaim ClaimTypeReferenceId="extension_PPCounter" TransformationClaimType="outputClaim" />
-     </OutputClaims>
- </ClaimsTransformation> 
- ``` 
- *PPShouldExecute* claim is added and set to *true* when *PPCounter* equals 3. **It enables progressive profiling prompt on every third log-in** 
- ```xml
- <ClaimsTransformation Id="SetProgressiveProfilingShouldExecute" TransformationMethod="AssertNumber">
-     <InputClaims>
-         <InputClaim ClaimTypeReferenceId="extension_PPCounter" TransformationClaimType="inputClaim" />
-     </InputClaims>
-     <InputParameters>
-         <InputParameter Id="Operator" DataType="string" Value="GreaterThanOrEqual" />
-         <InputParameter Id="CompareToValue" DataType="int" Value="3" />
-         <InputParameter Id="throwError" DataType="boolean" Value="false" />
-     </InputParameters>
-     <OutputClaims>
-         <OutputClaim ClaimTypeReferenceId="PPShouldExecute" TransformationClaimType="outputClaim" />
-     </OutputClaims>
- </ClaimsTransformation>
- ```
+    ```xml
+    <TechnicalProfile Id="AAD-UserReadUsingObjectId">
+        <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="extension_PPCounter" DefaultValue="0"/>
+        </OutputClaims>
+        <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="IncrementProgressiveProfileCounter" />
+            <OutputClaimsTransformation ReferenceId="SetProgressiveProfilingShouldExecute" />
+        </OutputClaimsTransformations>
+    </TechnicalProfile>  
+    ```
+    
+    *PPCounter* claim is read from AD. If it does not exist its value is set to 0. Additionaly, two output claims transformations are executed:  
+    *PPCounter* claim is incremented 
+    
+    ```xml
+    <ClaimsTransformation Id="IncrementProgressiveProfileCounter" TransformationMethod="AdjustNumber">
+        <InputClaims>
+            <InputClaim ClaimTypeReferenceId="extension_PPCounter" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+            <InputParameter Id="Operator" DataType="string" Value="INCREMENT" />
+        </InputParameters>
+        <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="extension_PPCounter" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+    </ClaimsTransformation> 
+    
+    ``` 
+    *PPShouldExecute* claim is added and set to *true* when *PPCounter* equals 3. **It enables progressive profiling prompt on every third log-in** 
+    
+    ```xml
+    <ClaimsTransformation Id="SetProgressiveProfilingShouldExecute" TransformationMethod="AssertNumber">
+        <InputClaims>
+            <InputClaim ClaimTypeReferenceId="extension_PPCounter" TransformationClaimType="inputClaim" />
+        </InputClaims>
+        <InputParameters>
+            <InputParameter Id="Operator" DataType="string" Value="GreaterThanOrEqual" />
+            <InputParameter Id="CompareToValue" DataType="int" Value="3" />
+            <InputParameter Id="throwError" DataType="boolean" Value="false" />
+        </InputParameters>
+        <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="PPShouldExecute" TransformationClaimType="outputClaim" />
+        </OutputClaims>
+    </ClaimsTransformation>
+    ```
 
-2. ProgressiveProfile_TrustFrameworkExtensions 
+2. ProgressiveProfile_TrustFrameworkExtensions
 
- ```xml
- <TechnicalProfile Id="AAD-UserReadUsingObjectId">
-     <OutputClaims>
-         <OutputClaim ClaimTypeReferenceId="extension_PreferedTraining"/>
-         <OutputClaim ClaimTypeReferenceId="extension_PreferedExcercises"/>
-     </OutputClaims>
- </TechnicalProfile>
- ```
- Progressive profiling, implementation specific, claims are read from AD as well. 
+    ```xml
+    <TechnicalProfile Id="AAD-UserReadUsingObjectId">
+        <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="extension_PreferedTraining"/>
+            <OutputClaim ClaimTypeReferenceId="extension_PreferedExcercises"/>
+        </OutputClaims>
+    </TechnicalProfile>
+    ```
+
+    Progressive profiling, implementation specific, claims are read from AD as well. 
 
 **Step 4** executes SubJourney which is designed to gather and store user preferences. Each Orchestration Step correspond with single progressive profiling claim. Its structure can be easily extended when new application specific claims are added. SubJourney is executed when *PPShouldExecute* equals true. 
 
