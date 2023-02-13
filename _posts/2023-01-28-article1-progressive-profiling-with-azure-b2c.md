@@ -10,7 +10,7 @@ tags:
 cover-img: /assets/img/article1/cover.png
 share-img: /assets/img/article1/cover.png
 ---
-Azure AD B2C provides advanced tools for user identity and access management. Modern applications often delegate identity and access management to external services. At the same time authorization and authentication needs to be highly flexible providing features as: 
+Azure AD B2C provides advanced tools for user identity and access management. Modern applications often delegate identity and access management to external services. At the same time authorization and authentication needs to be highly flexible, providing features as: 
 * Integration with external identity providers like GitHub or Facebook etc. 
 * Customization of user experience during sign-in, sign-up, profile edit etc. 
 * Extension of user identity with application-specific information 
