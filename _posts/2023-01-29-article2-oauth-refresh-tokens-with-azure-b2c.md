@@ -100,41 +100,47 @@ Token revocation can be achieved in three different ways using
 ```
 Revoke-AzureADUserAllRefreshToken -ObjectId <String> 
 ```
-##### 2. Using Azure portal
- *Revoke session* button is available in B2C tenant user settings (Handling of token revocation, after using this option, requires additional implementation. It is described in further section).
- ![refresh token](/assets/img/article2/azure-b2c-refresh-token-revoke-in-azure-portal.jpg)
 
-##### 3. Using Graph API
- ```
- POST https://graph.windows.net/myorganization/users/{user_id}/invalidateAllRefreshTokens?api-version 
- ```
- Graph Api call requires caller to have User.ReadWrite permission. Azure AD B2C does not support delegated (sign in user-related) User.ReadWrite permission. From the other hand User.ReadWriteAll permissions can be granted as Application permission, however since it is not related with application sign in user, application will be entitled to read or write all users data.  This solution is rather suited for administrator usage rather than for application to revoke the token on behalf of signed in user. 
+##### 2. Using Graph API
 
+```
+POST https://graph.windows.net/myorganization/users/{user_id}/invalidateAllRefreshTokens?api-version 
+```
+
+##### 3. Using Azure portal
+*Revoke session* button is available in B2C tenant user settings 
+![refresh token](/assets/img/article2/azure-b2c-refresh-token-revoke-in-azure-portal.jpg)
+ 
 ---
-#### Revocation and access tokens
-Revocation does not invalidate the access token. User does not lose the access immediately. Access tokens are valid until expiration. Once application gets access token, there is no way to stop the application from accessing resource with this access token.
-Revocation prevents from acquiring new id/access tokens without reauthentication.  
+
+**This solution doesn't invalidate refresh token directly. It is designed to revoke user session, not refresh tokens. Though it is possible to implement a custom logic which stops refresh token from being used, after user session is revoked. Specific implementation is described in [customizing refresh token flow section](#customizing-refresh-token-flow).**
+
+ ---
 
 #### Azure AD B2C revocation scenarios
 Azure AD B2C token revocation possibilities seem to be designed for administrator usage scenarios. For example, when user loss device, administrator can revoke tokens, so reauthentication will be required.  
 
 This approach doesn’t work well with scenarios, where users need to revoke their own tokens. However, it is valid requirement considering security reasons. After user logs out from application, refresh tokens are usually removed from application memory but they are not invalidated on Auth Server and still can be used. It creates a risk of malicious usage of intercepted refresh tokens. 
 
+#### Revocation and access tokens
+Refresh token revocation does not invalidate the access token. User does not lose the access immediately. Access tokens are valid until they expire. Once application gets an access token, there is no way to prevent application from accessing resource with this access token.
+Refresh token revocation prevents from acquiring new id/access tokens without reauthentication.  
+
 #### One time use refresh token 
-Staying in the context of security, there are [recommendation](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-security-topics) for Auth servers to generate one time use refresh tokens. It means refresh token can be used only once to request new access and refresh token pair. New refresh token can be used only once as well. This approach mitigates refresh token usage risk, even if it is intercepted by attacker. However, Azure AD B2C allows to use the same refresh token multiple times. 
+Staying in the context of security, there are [recommendation](https://datatracker.ietf.org/doc/html/draft-ietf-oauth-security-topics) for Auth servers to generate one time use refresh tokens. Refresh token should be used only once to request new access and refresh tokens. New refresh token, can be used only once as well. This approach mitigates refresh token usage risk, even if it is intercepted by attacker. Though Azure AD B2C by default allows to use the same refresh token multiple times. 
 
 ## Customizing refresh token flow 
-Customization of token claims can be implemented using Azure AD B2C custom policies.  It is possible to customize claims generation process, when the tokens are requested specifically using refresh token.  
+Customization of token claims can be implemented using Azure AD B2C custom policies.  Claims generation process can be customized, when the tokens are requested specifically using refresh token.  
 
 This functionality gives variety of possibilities, for example 
 
-* Refresh user claims in returned id token using Azure AD, or other identity provider data. Some claims might have changed after they were initially generated during sign in process. 
-* Call external API to check if user, who is trying to refresh the token, is on some backlist. Interrupt token generation if that is the case. 
+* Refresh user claims in returned id token. Some claims might have changed after they were initially generated during sign in process. 
+* Call external API to check if user, who is trying to refresh the token, is on some blacklist. Interrupt token generation if that is the case. 
 * Check if user’s refresh token was revoked.
 
-In example below, I will present how to incorporate revoked session check into refresh token flow.
+Example below, presents how to check if user session was revoked, before refreshing the token.
 
-After requesting */token* endpoint with *grant_type=refresh_token* Azure AD B2C triggers *UserJourney* which is specified in *RelyingParty* as an Endpoint with *Id=Token*.  
+After */token* endpoint is requested with with *grant_type=refresh_token*, Azure AD B2C triggers *UserJourney*, referenced in *RelyingParty* as an Endpoint with *Id=Token*.  
 ```xml
 <RelyingParty>
     <DefaultUserJourney ReferenceId="SignUpOrSignIn" />
@@ -168,8 +174,6 @@ After requesting */token* endpoint with *grant_type=refresh_token* Azure AD B2C 
 ```
 
 which utilize following *TechnicalProfiles*
-
-
 
 1. ***RefreshTokenReadAndSetup*** – it just returns refresh token parameters like *objectId* and *refreshTokenIssuedOnDateTime* in output claims. Before executing refresh token UserJourney, refresh token claims seems to be already preloaded into claims bag. (It is different approach comparing to [UserInfoEndpoint implementation](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/active-directory-b2c/userinfo-endpoint.md), where dedicated technical profile loads access token claims into claims bag explicitly). 
 2. ***AAD-UserReadUsingObjectId-CheckRefreshTokenDate*** – retrieves user information stored in azure AD. Since it uses base *AAD-UserReadUsingObjectId* TechnicalProfile, basic user data will updated in returned id/access token. Additionally, *refreshTokensValidFromDateTime* property is read from AD. When user’s refresh token is revoked *refreshTokensValidFromDateTime* is set to time it happened.   
