@@ -180,26 +180,26 @@ which utilize following *TechnicalProfiles*
 1. ***RefreshTokenReadAndSetup*** – it just returns refresh token parameters like *objectId* and *refreshTokenIssuedOnDateTime* in output claims. Before executing refresh token UserJourney, refresh token claims seems to be already preloaded into claims bag. (It is different approach comparing to [UserInfoEndpoint implementation](https://github.com/MicrosoftDocs/azure-docs/blob/main/articles/active-directory-b2c/userinfo-endpoint.md), where dedicated technical profile loads access token claims into claims bag explicitly). 
 2. ***AAD-UserReadUsingObjectId-CheckRefreshTokenDate*** – retrieves user information stored in azure AD. Since it uses base *AAD-UserReadUsingObjectId* TechnicalProfile, basic user data will updated in returned id/access token. Additionally, *refreshTokensValidFromDateTime* property is read from AD. When user’s refresh token is revoked *refreshTokensValidFromDateTime* is set to time it happened.
    
-   ```xml
-   <TechnicalProfile Id="AAD-UserReadUsingObjectId-CheckRefreshTokenDate">
-       <OutputClaims>
-           <OutputClaim ClaimTypeReferenceId="refreshTokensValidFromDateTime" />
-           <OutputClaim ClaimTypeReferenceId="displayName" />
-       </OutputClaims>
-       <OutputClaimsTransformations>
-           <OutputClaimsTransformation ReferenceId="AssertRefreshTokenIssuedLaterThanValidFromDate" />
-       </OutputClaimsTransformations>
-       <IncludeTechnicalProfile ReferenceId="AAD-UserReadUsingObjectId" />
-   </TechnicalProfile> 
-   ```
+    ```xml
+    <TechnicalProfile Id="AAD-UserReadUsingObjectId-CheckRefreshTokenDate">
+        <OutputClaims>
+            <OutputClaim ClaimTypeReferenceId="refreshTokensValidFromDateTime" />
+            <OutputClaim ClaimTypeReferenceId="displayName" />
+        </OutputClaims>
+        <OutputClaimsTransformations>
+            <OutputClaimsTransformation ReferenceId="AssertRefreshTokenIssuedLaterThanValidFromDate" />
+        </OutputClaimsTransformations>
+        <IncludeTechnicalProfile ReferenceId="AAD-UserReadUsingObjectId" />
+    </TechnicalProfile> 
+    ```
    
-   By comparing *refreshTokensValidFromDateTime* property with *refreshTokenIssuedOnDateTime* it is possible to validate if used refresh token should be accepted by auth server. This logic is implemented by output claim transformation. Once *refreshTokensValidFromDateTime* is greater that *refreshTokenIssuedOnDateTime*, exception is thrown and UserJourney is interrupted. In that case, Auth server returns **400-Bad request** http response, including body: 
+    By comparing *refreshTokensValidFromDateTime* property with *refreshTokenIssuedOnDateTime* it is possible to validate if used refresh token should be accepted by auth server. This logic is implemented by output claim transformation. Once *refreshTokensValidFromDateTime* is greater that *refreshTokenIssuedOnDateTime*, exception is thrown and UserJourney is interrupted. In that case, Auth server returns **400-Bad request** http response, including body: 
    
-   ```json
-   { 
-       "error": "invalid_grant", 
-       "error_description": "AADB2C90129: The provided grant has been revoked. Please reauthenticate and try again.Correlation ID: xxxxxx-xxxx-xxxx-xxxx-xxxxxxxx\r\nTimestamp: xxxx-xx-xx xx:xx:xxx\r\n" 
-   } 
-   ```
+    ```json
+    { 
+        "error": "invalid_grant", 
+        "error_description": "AADB2C90129: The provided grant has been revoked. Please reauthenticate and try again.Correlation ID: xxxxxx-xxxx-xxxx-xxxx-xxxxxxxx\r\nTimestamp: xxxx-xx-xx xx:xx:xxx\r\n" 
+    } 
+    ```
 
 3. ***JwtIssuer*** - OpenIdConnect technical profile that issues requested token and returns it to relaying party.  Refresh token properties described above, in Refresh tokens properties in Azure AD B2C section, can be specified in its definition. 

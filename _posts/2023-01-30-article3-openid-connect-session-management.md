@@ -150,7 +150,7 @@ Front-channel logout mechanism utilizes iframes. IdP loads a website containing 
 Main limitation of frontend logout solutions is, again, related with third-party cookies. Since *frontchannel_logout_uri* is iframed and called on IdP, there might be some limitations with access to RP’s cookies.
 
 #### Limitation 2: URI fragment component 
-Additionally, *frontchannel_logout_uri* must not contains fragment component (like example.com#logout). It is natural navigation approach in some SPA frameworks.
+Additionally, *frontchannel_logout_uri* must not contains fragment component (like example.com#logout). Many SPA frameworks uses fragment components for routing.
 
 ### Back-Channel Logout
 Back-Channel Logout is described in [OpenId Connect documentation](https://openid.net/specs/openid-connect-backchannel-1_0.html). Logout information is sent to all RPs using current browser session via back-channel. In response to */logout* request IdP creates a [*logout_token*](https://openid.net/specs/openid-connect-backchannel-1_0.html#LogoutToken) and sends it via back-channel POST call to RP’s */backchannel_logout_uri*. *backchannel_logout_uri* is associated with RP in IdP client registration properties. 
