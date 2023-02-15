@@ -7,7 +7,7 @@ tags:
 - OAuth2.0
 ---
 
-OpenId-Connect **session** represents the context of logged-in user, maintained between Applications and Identity Provider Server. Session enables applications to provide seamless authentication experience by:
+OpenId-Connect **session** represents the authenticated user context, maintained between Applications and Identity Provider Server. Session enables applications to provide seamless authentication experience by:
 
 * **Avoiding frequent authentication** – As long as there is active session available, application can acquire new access/id tokens from Identity Provider Server, without user being asked to re-authenticate. 
 
