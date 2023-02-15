@@ -9,7 +9,7 @@ tags:
 
 OpenId-Connect **session** represents the authenticated user context, maintained between Applications and Identity Provider Server. Session enables applications to provide seamless authentication experience by:
 
-* **Avoiding frequent authentication** – As long as there is active session available, application can acquire new access/id tokens from Identity Provider Server, without user being asked to re-authenticate. 
+* **Avoiding frequent authentication** – As long as there is an active session available, application can acquire new access/id tokens from Identity Provider Server, without user being asked to re-authenticate. 
 
 * **Enabling Single sign-on (SSO)** - SSO enables multiple applications launched in the same web browser and working under the same Identity Provider Server to share the same user session. Once user logs-in into single application, other applications, can be used, without user being asked to re-authenticate. 
 
