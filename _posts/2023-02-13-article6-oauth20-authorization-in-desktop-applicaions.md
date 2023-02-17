@@ -10,7 +10,7 @@ cover-img: /assets/img/article6/system-browser-flow.png
 
 This article describes possible solutions for integration desktop applications with OAuth 2.0 compliant authorization serves. Thanks to OAuth 2.0 flexibility, it is possible to perform authorization on many platforms, including Desktop. This article focuses on authorizing to OAuth 2.0 servers on user’s behalf. 
 
-#Table of contents
+# Table of contents
 - [Desktop application](#desktop-application)
   - [Challenges](#challenges)
 - [Solution 1: Native web browser component](#solution-1-native-web-browser-component)
@@ -30,7 +30,7 @@ Desktop application should be considered as public (non-confidential) client. Du
 
 It is highly [recommended](https://www.rfc-editor.org/rfc/rfc8252#section-6) to use Authorization Code grant flow with PKCE extension, to authorize user with Desktop application. PKCE is designed for public clients and doesn’t require storing any secrets on user’s device. 
 
-While performing on user’s behalf authorization, it is necessary to display a form, where users can enter their credentials. Authorization servers return html-based form in response to */authorize* request, which initiated OAuth grant flow.
+While performing on user’s behalf authorization, authorization server displays a form, where users can enter their credentials. Authorization servers return html-based form in response to */authorize* request, which initiated OAuth grant flow.
 
 Desktop application has to display html-based form to the user. Once user is authorized, application gathers authorization code. Authorization code is needed to obtain access/id token from /token endpoint.
 
