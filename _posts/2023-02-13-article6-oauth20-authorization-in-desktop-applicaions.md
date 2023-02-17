@@ -69,7 +69,7 @@ void Authorize()
       return; 
 
     //get code parameter from redirect uri  
-     var uri = new Uri(e.Uri); 
+    var uri = new Uri(e.Uri); 
     var code = HttpUtility.ParseQueryString(uri.Query).Get("code"); 
 
     //request token using authorization code 
