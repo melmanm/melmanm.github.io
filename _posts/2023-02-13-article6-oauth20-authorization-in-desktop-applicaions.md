@@ -82,7 +82,7 @@ void Authorize()
 ## Redirect URI
 Application doesn't require redirect URI to be reached. It takes advantage from browser just trying to navigate to it. Since it is not required to be reachable, it can be any, even not existing, URI. It only needs to be configured as allowed redirect URI on authorization server. 
 
-Authorization server providers, usually add default redirect URI, when developer registers desktop application. It is usually a neutral domain, which belongs to provider. It most likely returns empty html page with 200 status code.
+Authorization server providers usually add default redirect URI, when developer registers desktop application. It is usually a neutral domain, which belongs to provider. It most likely returns empty html page with 200 status code.
 
 ## Security Consideration
 Native browser component, usually doesn't display address bar. Even it is displayed, its content is entirely controlled by desktop application. It makes users unable to verify if they are signing-in to legitimate authorization server. Authorization server address and its https certificate, should be always verified by the user to mitigate phishing attacks. Even if your application is trusted, it is not good practice to make users used to such design.
