@@ -94,7 +94,7 @@ Alternatively, default system browser (like chrome, firefox, edge) can be used.
 
 In order to display login form, system browser can be launched by desktop application, with */authorize* request configured as startup URI. Unfortunately, application logic is not able to react on system browser's navigation events, like in Solution 1.
 
-Though application can host its own http server endpoint available at redirect URI address. Since system web browser is running on client machine it can successfully resolve localhost loopback address. Considering that, application can host http server on one of the localhost ports e.g. `http://localhost:8888`. Once localhost address is set as redirect URI on authorization server and specified in */authorize* request, authorization response containing code can be redirected to it.
+Though application can host its own http server endpoint available at redirect URI address. Since system web browser is running on client machine, it can successfully resolve localhost loopback address. Considering that, application can host http server on one of the localhost ports e.g. `http://localhost:8888`. Once localhost address is set as redirect URI on authorization server and specified in */authorize* request, authorization response containing code can be redirected to it.
 
 ![system-browser-component](/assets/img/article6/system-browser-flow.png)
 
@@ -148,6 +148,8 @@ System browser enables desktop applications to share user session with web appli
 Using system browser, to authorize desktop application’s user, involves a localhost server endpoint. In case loopback interface is accessible by other application, authorization code can be intercepted. To prevent it, applications should implement PKCE. It protects the intercepted authorization code from being used to obtain a token.
 
 **System browser, is OAuth 2.0 recommended solution for authorizing users in desktop applications.**
+
+---
 
 # Dedicated libraries
 Authorization server providers often distribute code libraries dedicated to their products. If dedicated library is available, it is highly recommended to use it. It makes implementation easier and ensures it is compatible with specific authorization server. 
