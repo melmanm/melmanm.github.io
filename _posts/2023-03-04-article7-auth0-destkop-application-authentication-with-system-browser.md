@@ -9,9 +9,7 @@ tags:
 cover-img: /assets/img/article7/cover.jpg
 ---
 
-In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications.
-
-In this article I will describe how to implement authentication in .NET desktop application with auth0, using System Browser to perform user's login and logout.
+In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications. In this article I will describe how to implement authentication in .NET desktop application with auth0, using System Browser to perform user's login and logout.
 
 
 - [Auth0 nuget packages](#auth0-nuget-packages)
@@ -157,10 +155,11 @@ internal class SystemBrowser : IBrowser
 ```
 
 Once authorization code is captured, system browser displays
+
 ![system-browser-flow](/assets/img/article7/successful-authentication.jpg)
 After successful logout user should see
-![system-browser-flow](/assets/img/article7/successful-logout.jpg)
 
+![system-browser-flow](/assets/img/article7/successful-logout.jpg)
 
 `SystemBrowser` class can be used to instantiate `Auth0ClientOptions` as below
 ```csharp
