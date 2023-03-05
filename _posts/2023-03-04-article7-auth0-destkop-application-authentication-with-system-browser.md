@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Auth0: using system browser to authenticate in WPF and WinForms applications"
+title: "Auth0: using system browser to authenticate in .NET desktop application"
 categories: misc
 tags:
 - OAuth2.0
