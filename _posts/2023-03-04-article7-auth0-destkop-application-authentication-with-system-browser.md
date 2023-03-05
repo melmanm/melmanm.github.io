@@ -26,7 +26,7 @@ In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20
 
 ## Auth0 nuget packages
 Auth0 provides `Auth0.OidcClient.WPF` and `Auth0.OidcClient.WinForms` nuget packages, which simplifies authentication implementation in WPF and WinForms-based applications.
-Following example shows minimal code to authenticate user and gather id_token using `Auth0.OidcClient.WPF` library.
+Following example shows minimal code, needed to authenticate user and gather id_token using `Auth0.OidcClient.WPF` library.
 
 ```csharp
 string domain = ;//application domain
