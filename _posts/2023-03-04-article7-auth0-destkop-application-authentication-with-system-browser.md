@@ -9,7 +9,7 @@ tags:
 cover-img: /assets/img/article7/cover.jpg
 ---
 
-In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications. In this article I will describe how to implement authentication in .NET desktop application with Auth0, using System Browser to perform user's login and logout.
+In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications. In this article I will describe how to implement authentication in .NET desktop application with Auth0, using default system browser to perform user's login and logout.
 
 
 - [Auth0 nuget packages](#auth0-nuget-packages)
