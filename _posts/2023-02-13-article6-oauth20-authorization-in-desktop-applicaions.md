@@ -32,9 +32,9 @@ It is highly [recommended](https://www.rfc-editor.org/rfc/rfc8252#section-6) to 
 
 While performing on user’s behalf authorization, authorization server displays a form, where users can enter their credentials. Authorization servers return html-based form in response to */authorize* request, which initiated OAuth grant flow.
 
-Desktop application has to display html-based form to the user. Once user is authorized, application gathers authorization code. Authorization code is needed to obtain access/id token from /token endpoint.
+Desktop application has to display html-based form to the user. Once user is authenticated, application gathers authorization code. Authorization code is needed to obtain access/id token from /token endpoint.
 
-Authorization server sends authorization code to the redirect URI via front channel. Redirect URI is specified in initial /authorize request as parameter. To prevent [open redirector attack](https://oauth.net/advisories/2014-1-covert-redirect/), redirect URI needs to be first configured on authorization server in application registration settings.  
+Authorization server returns authorization code, as a parameter, within a front channel call to redirect URI. Redirect URI is specified in initial /authorize request as parameter. To prevent [open redirector attack](https://oauth.net/advisories/2014-1-covert-redirect/), redirect URI needs to be first configured on authorization server in application registration settings.  
 
 Gathering authorization code from redirect URI, becomes a challenge for desktop application, since normally it doesn’t operate in web domain and can’t be reached by URI.
 
@@ -94,7 +94,7 @@ Alternatively, default system browser (like chrome, firefox, edge) can be used.
 
 In order to display login form, system browser can be launched by desktop application, with */authorize* request configured as startup URI. Unfortunately, application logic is not able to react on system browser's navigation events, like in Solution 1.
 
-Though application can host its own http server endpoint available at redirect URI address. Since system web browser is running on client machine, it can successfully resolve localhost loopback address. Considering that, application can host http server on one of the localhost ports e.g. `http://localhost:8888`. Once localhost address is set as redirect URI on authorization server and specified in */authorize* request, authorization response containing code can be redirected to it.
+Though application can host its own http server endpoint available at redirect URI address. Since system web browser is running on client machine, it can successfully resolve localhost loopback address. Considering that, application can host http server on one of the localhost ports e.g. `http://localhost:8888`. Once localhost address is set as redirect URI on authorization server and specified in */authorize* request, authorization response containing code can be captured by localhost server.
 
 ![system-browser-component](/assets/img/article6/system-browser-flow.png)
 
