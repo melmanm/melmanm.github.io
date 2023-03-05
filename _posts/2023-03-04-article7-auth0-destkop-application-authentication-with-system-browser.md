@@ -9,7 +9,7 @@ tags:
 cover-img: /assets/img/article7/cover.jpg
 ---
 
-In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications. In this article I will describe how to implement authentication in .NET desktop application with auth0, using System Browser to perform user's login and logout.
+In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications. In this article I will describe how to implement authentication in .NET desktop application with Auth0, using System Browser to perform user's login and logout.
 
 
 - [Auth0 nuget packages](#auth0-nuget-packages)
@@ -48,7 +48,7 @@ By default Auth0 uses `WebViewBrowser` implementation of `IBrowser` interface. I
 By default it renders html login page in new application window
 ![auth0-default-login](/assets/img/article7/auth0-inapp-login.png)
 
-## Display auth0 login form in system browser
+## Display Auth0 login form in system browser
 In this section I will present custom implementation of `IBrowser` interface, which displays login form using system browser.
 
 ### Desired architecture
@@ -181,7 +181,7 @@ public void Login
 }
 ```
 
-Note that given `RedirectUri` and `PostLogoutRedirectUri` need to be registered in auth0 application settings.
+Note that given `RedirectUri` and `PostLogoutRedirectUri` need to be registered in Auth0 application settings.
 
 ### Implementation considerations
 #### Redirect URI
@@ -189,7 +189,7 @@ Proposed implementation arbitrary specifies redirect URI as `http://localhost:88
 
 To mitigate this risk, implementation could verify if desired localhost port is not occupied. In case it is occupied, other port can be verified and eventually used i.e. `8889`.
 
-Note that all possible redirect URIs needs to be registered in auth0 application settings. As for now auth0 does not provide an option to specify redirect URI port using wildcard (i.e. `http://localhost:*`). However, it is possible to register multiple localhost redirect URIs, with a certain port range. Application can try to find a free port within the registered range.
+Note that all possible redirect URIs needs to be registered in Auth0 application settings. As for now Auth0 does not provide an option to specify redirect URI port using wildcard (i.e. `http://localhost:*`). However, it is possible to register multiple localhost redirect URIs, with a certain port range. Application can try to find a free port within the registered range.
 
 #### HttpListener instance
 In presented example, `SystemBrowser` holds an instance of `HttpListener`. Before the instance is initialized, there is `_httpListener?.Abort();` executed to close and dispose existing `HttpListener` instance (if there is any). This mechanism is intended for scenarios, where user initiates login, but does not complete it. In subsequent login attempt existing listener will be aborted first, before initializing new instance. `Abort()` causes `HttpListenerException` in original thread, so it needs to be handled properly.

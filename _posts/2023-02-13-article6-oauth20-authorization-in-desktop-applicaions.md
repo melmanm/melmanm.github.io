@@ -163,3 +163,5 @@ Table below compares key features of presented solution
 | **Security** | User is not able to verify authorization server address and certificate. | OAuth 2.0 recommendation |
 | **SSO** | No, partially depends on framework and component  | Yes |
 | **Support in popular Authorization server providers libraries** | Yes  | Yes |
+
+In [next article](https://melmanm.github.io/misc/2023/03/04/article7-auth0-destkop-application-authentication-with-system-browser.html) I will present how to implement system browser login in WPF and WinForms with Auth0.
