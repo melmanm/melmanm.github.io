@@ -157,6 +157,7 @@ internal class SystemBrowser : IBrowser
 Once authorization code is captured, system browser displays
 
 ![system-browser-flow](/assets/img/article7/successful-authentication.jpg)
+
 After successful logout user should see
 
 ![system-browser-flow](/assets/img/article7/successful-logout.jpg)
