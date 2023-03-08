@@ -9,7 +9,7 @@ tags:
 cover-img: /assets/img/article7/cover.jpg
 ---
 
-In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications. In this article I will describe how to implement authentication in .NET desktop application with Auth0, using default system browser to perform user's login and logout.
+In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications. In this article I will describe how to implement authentication in .NET desktop application with Auth0, using default system browser to perform user's login and logout actions.
 
 
 - [Auth0 nuget packages](#auth0-nuget-packages)
@@ -25,8 +25,8 @@ In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20
 
 
 ## Auth0 nuget packages
-Auth0 provides `Auth0.OidcClient.WPF` and `Auth0.OidcClient.WinForms` nuget packages, which simplifies authentication implementation in WPF and WinForms-based applications.
-Following example shows minimal code, needed to authenticate user and gather id_token using `Auth0.OidcClient.WPF` library.
+Auth0 provides `Auth0.OidcClient.WPF` and `Auth0.OidcClient.WinForms` nuget packages, which enable developers to integrate Auth0 authorization and authentication with WPF and WinForms-based applications.
+Following example presents minimal code, needed to authenticate user and gather id_token using `Auth0.OidcClient.WPF` library.
 
 ```csharp
 string domain = ;//application domain
@@ -40,26 +40,27 @@ var loginResult = await client.LoginAsync();
 var id_token = loginResult.IdentityToken;
 var userClaims = loginResult.User.Claims;
 ```
+*Authorization code flow with PKCE is used to obtain a token*
 
-`Auth0ClientOptions` includes `IBrowser Browser {get; set;}` property, which takes responsibility of displaying login screen to the user. Moreover, it is used to perform user logout process.
+`Auth0ClientOptions`class includes `IBrowser Browser {get; set;}` property. `IBrowser` implementation takes responsibility of displaying login screen to the user. Additionally, it is used to perform user logout process.
 
 ### Default implementation. 
-By default Auth0 uses `WebViewBrowser` implementation of `IBrowser` interface. It uses [`WebViewCompatible`](https://learn.microsoft.com/en-us/windows/communitytoolkit/controls/wpf-winforms/webviewcompatible) component to display login window to the user.
-By default it renders html login page in new application window
+By default, Auth0 nuget package uses `WebViewBrowser` implementation of `IBrowser` interface. It makes use of [`WebViewCompatible`](https://learn.microsoft.com/en-us/windows/communitytoolkit/controls/wpf-winforms/webviewcompatible) framework component, to display login form to the user.
+`WebViewBrowser` renders html login page in new application window
 ![auth0-default-login](/assets/img/article7/auth0-inapp-login.png)
 
 ## Display Auth0 login form in system browser
-In this section I will present custom implementation of `IBrowser` interface, which displays login form using system browser.
+In this section presents custom implementation of `IBrowser` interface, which displays login form using system browser.
 
 ### Desired architecture
-In order to display login form, system browser should be launched by desktop application, with authorization request configured as startup URL.
+In order to display login form, system browser should be launched by desktop application, with authorization request configured as startup URL. In response, authorization server returns login page.
 
-After user login, application has to capture redirect URI auth, with authorization code provided as parameter. Since system web browser is running on client machine, it can successfully resolve localhost loopback address. Application can host http server on one of the localhost ports e.g. `http://localhost:8888`. Once localhost address is set as redirect URI on authorization server and specified in */authorize* request, authorization response containing code can be captured by localhost server.
+Once user is authenticated, application has to capture redirect URI, with authorization code provided as parameter. Since system browser is running on client machine, it can successfully resolve localhost loopback address. Application can host http server on one of the localhost ports e.g. `http://localhost:8888`. Once localhost address is set as redirect URI on authorization server and specified in initial authorization request, authorization code can be captured by the server.
 
 ![system-browser-flow](/assets/img/article6/system-browser-flow.png)
 
 ### Custom IBrowser implementation
-`IBrowser` interface includes a single signature:
+`IBrowser` interface includes a single method signature:
 
 ```csharp
 public interface IBrowser
@@ -68,11 +69,11 @@ public interface IBrowser
 }
 ```
 
-`BrowserOptions`, passed as an argument, specifies `StartUrl` and `EndUrl`
-* `StartUrl` - URL to initiate OAuth action. In case of authentication or authorization it is auth server's `/authorize` URL. In the context of logout it specifies `/logout` endpoint request.
-* `EndUrl` - Redirect URL. In case of logout it represents post logout redirect url.
+`BrowserOptions`, passed as an argument, specifies `StartUrl` and `EndUrl` properties
+* `StartUrl` - URL to initiate OAuth action. In case of authentication or authorization it is set to authorize request. (In the context of logout it represents `/logout` endpoint request.)
+* `EndUrl` - Redirect URL. (In case of logout it represents post logout redirect url.)
 
-Following, custom, `IBrowser` implementation utilizes system browser to perform login and logout
+Below, custom, `IBrowser` implementation utilizes system browser to perform login and logout actions
 
 ```csharp
 internal class SystemBrowser : IBrowser
@@ -158,7 +159,7 @@ Once authorization code is captured, system browser displays
 
 ![system-browser-flow](/assets/img/article7/successful-authentication.jpg)
 
-After successful logout user should see
+After successful logout, system browser displays
 
 ![system-browser-flow](/assets/img/article7/successful-logout.jpg)
 
@@ -186,17 +187,17 @@ Note that given `RedirectUri` and `PostLogoutRedirectUri` need to be registered 
 
 ### Implementation considerations
 #### Redirect URI
-Proposed implementation arbitrary specifies redirect URI as `http://localhost:8888`. It can be considered as risky approach, since port `8888` is assumed not occupied by other process on client machine. In case this specific port is used by other process, authentication could not be performed.
+Proposed implementation arbitrary specifies redirect URI as `http://localhost:8888`. It can be considered risky to assume  port `8888` is not occupied by other process in application's target environment. In case port is already in use, authentication could not be performed.
 
-To mitigate this risk, implementation could verify if desired localhost port is not occupied. In case it is occupied, other port can be verified and eventually used i.e. `8889`.
+To mitigate this risk, implementation could verify, if desired port is not occupied. In case it is occupied, other port can be verified and eventually used i.e. `8889`.
 
-Note that all possible redirect URIs needs to be registered in Auth0 application settings. As for now Auth0 does not provide an option to specify redirect URI port using wildcard (i.e. `http://localhost:*`). However, it is possible to register multiple localhost redirect URIs, with a certain port range. Application can try to find a free port within the registered range.
+Note that all possible redirect URIs needs to be registered in Auth0 application settings. As for now Auth0 does not provide an option to specify redirect URI port using wildcard (i.e. `http://localhost:*`). However, it is possible to register multiple localhost redirect URIs with a certain port range. Application can try to find a free port within the registered range.
 
 #### HttpListener instance
-In presented example, `SystemBrowser` holds an instance of `HttpListener`. Before the instance is initialized, there is `_httpListener?.Abort();` executed to close and dispose existing `HttpListener` instance (if there is any). This mechanism is intended for scenarios, where user initiates login, but does not complete it. In subsequent login attempt existing listener will be aborted first, before initializing new instance. `Abort()` causes `HttpListenerException` in original thread, so it needs to be handled properly.
+In presented example, `SystemBrowser` holds an instance of `HttpListener`. Before the instance is initialized, there is `_httpListener?.Abort();` executed, to close and dispose existing `HttpListener` instance (if there is any). This mechanism is intended for scenarios, where user initiates login, but does not complete it. In subsequent login attempt existing listener will be aborted first, before initializing new instance. `Abort()` causes `HttpListenerException` in original thread, so it needs to be handled properly.
 
 #### Timeout
-Presented example, for sake of simplicity, does not consider timeout. `BrowserOptions`, passed as input parameter, contains `public TimeSpan Timeout { get; set; }` property. Further implementation can abort `HttpListener`, if no request was captured within given timeout.
+Presented example, for sake of simplicity, does not consider timeout. `BrowserOptions`, passed as input parameter, contains `public TimeSpan Timeout { get; set; }` property. If needed, `HttpListener` can be closed, if no request was captured within given timeout.
 
 
 
