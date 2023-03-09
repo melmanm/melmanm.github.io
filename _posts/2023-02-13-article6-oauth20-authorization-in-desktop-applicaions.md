@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OAuth 2.0 authorization in desktop applications"
+title: "OAuth 2.0 authorization with desktop application"
 categories: misc
 tags:
 - OAuth2.0
@@ -8,7 +8,7 @@ tags:
 cover-img: /assets/img/article6/system-browser-flow.png
 ---
 
-This article describes possible solutions for integration desktop applications with OAuth 2.0 compliant authorization serves. Thanks to OAuth 2.0 flexibility, it is possible to perform authorization on many platforms, including Desktop. This article focuses on authorizing to OAuth 2.0 servers on user’s behalf. 
+This article presents challenges and solutions for integration of OAuth 2.0 authorization with desktop applications. Vast majority of OAuth 2.0 compliant authorization servers lead user through authentication and consent process using html-based web form. This article shows how to seamlessly integrate this process into desktop application, to obtain id or/and access token.
 
 ## Table of contents
 - [Desktop application](#desktop-application)
