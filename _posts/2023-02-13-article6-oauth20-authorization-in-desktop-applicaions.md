@@ -34,7 +34,7 @@ While performing on user’s behalf authorization, authorization server displays
 
 Desktop application has to display html-based form to the user. Once user is authenticated, application gathers authorization code. Authorization code is needed to obtain access/id token from /token endpoint.
 
-Authorization server returns authorization code, as a parameter, within a front channel call to redirect URI. Redirect URI is specified in initial /authorize request as parameter. To prevent [open redirector attack](https://oauth.net/advisories/2014-1-covert-redirect/), redirect URI needs to be first configured on authorization server in application registration settings.  
+Authorization server returns authorization code, as a parameter, within a front channel call to redirect URI. Redirect URI is specified in initial */authorize* request as parameter. To prevent [open redirector attack](https://oauth.net/advisories/2014-1-covert-redirect/), redirect URI needs to be first configured on authorization server in application registration settings.  
 
 Gathering authorization code from redirect URI, becomes a challenge for desktop application, since normally it doesn’t operate in web domain and can’t be reached by URI.
 
