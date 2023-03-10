@@ -159,7 +159,7 @@ Table below compares key features of presented solution
 
 | | Native browser component | System browser 
 | :---  | :--- |:--- |
-| **User experience**  | Good. Authorization is entirely performed in desktop application.   | Medium. User is navigated to system browser to authorize. After process in finished user needs to navigate back to desktop application. |
+| **User experience**  | Good. Authorization is entirely performed in desktop application.   | Medium. User is navigated to system browser to authorize. After process is finished, user needs to navigate back to desktop application. |
 | **Security** | User is not able to verify authorization server address and certificate. | OAuth 2.0 recommendation |
 | **SSO** | No, partially depends on framework and component  | Yes |
 | **Support in popular Authorization server providers libraries** | Yes  | Yes |
