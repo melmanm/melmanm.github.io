@@ -74,6 +74,8 @@ void Authorize()
 
     //request token using authorization code 
     var token = GetToken(code);
+
+    //use token to access API
   }; 
 } 
 ```
@@ -123,6 +125,8 @@ string Authorize()
   
    var token = GetToken(code); 
    return token; 
+
+   //use token to access API
 }
 ```
 *CreateAuthorizeRequest() and GetToken(string token) methods are not shown for simplicity.*
