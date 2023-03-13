@@ -45,7 +45,7 @@ There are two main challenges that needs to be addressed to integrate desktop ap
 2. **How to gather authorization code, sent to redirect URI**
 
 ## Solution 1. Native web browser component
-Many desktop frameworks provide a dedicated web browser component. It can be embedded in another control or displayed in separate application widow. Application code can control browser component behavior and react to its events.
+Many desktop frameworks provide a dedicated web browser component. It can be embedded in another control or displayed in separate application window. Application code can control browser component behavior and react to its events.
 
 Application can subscribe to web browser component event, which is raised after address in navigation bar is changed. For instance, .NET *WebView2* control provides [*NavigationStarting*](https://learn.microsoft.com/en-us/microsoft-edge/webview2/concepts/navigation-events) event, triggered when
 
