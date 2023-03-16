@@ -61,7 +61,7 @@ Below table shows which OpenId Session management solutions, described in [previ
 In order to determine user session status, application can cyclically call Azure AD B2C */authorize* endpoint. */authorize* endpoint is used to initialize OAuth flow. In the context authentication it is called with *scope=openid* parameter. As the result of the flow *id_token* is passed to the application. 
 
 ---
-*MSAL.js always initializes PKCE grant flow to obtain id_token.*
+*MSAL.js always initializes authorization grant flow with PKCE to obtain the token.*
 
 ---
 
