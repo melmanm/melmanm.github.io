@@ -15,6 +15,30 @@ This article explains into OAuth 2.0 protocol from application developer, presen
 
 > This article is created as written form of a presentation that I had a pleasure to present recently.
 
+
+## Table of contents
+
+- [Table of contents](#table-of-contents)
+- [Back in 2007](#back-in-2007)
+- [The need of authorization protocol](#the-need-of-authorization-protocol)
+- [What Authorization means?](#what-authorization-means)
+- [The authorization we are used to - OAuth 2.0 usage examples](#the-authorization-we-are-used-to---oauth-20-usage-examples)
+- [OAuth 2.0 Roles](#oauth-20-roles)
+- [Authorization Code Grant](#authorization-code-grant)
+- [Why Authorization Code Grant is so complex?](#why-authorization-code-grant-is-so-complex)
+  - [Front Channel](#front-channel)
+  - [Back channel](#back-channel)
+- [What about public clients?](#what-about-public-clients)
+- [Implicit grant](#implicit-grant)
+  - [Implicit grant security tradeoffs](#implicit-grant-security-tradeoffs)
+- [Client registration](#client-registration)
+- [Access tokens](#access-tokens)
+  - [Reference access token](#reference-access-token)
+  - [Self contained access token](#self-contained-access-token)
+- [Other OAuth 2.0 grants](#other-oauth-20-grants)
+- [Where to find more about OAuth](#where-to-find-more-about-oauth)
+
+
 ## Back in 2007
 To understand the need for authorization framework, we need to go back to year 2007, when OAuth 1.0 was being created. Just to give you the best feeling I need to mention that 2007 was the year of IPhone 1 premiere, it was the year when Google get interested in Android OS, and mySpace was at its prime. 
 Back then web applications strived to provide integration with 3rd party services.
@@ -38,15 +62,16 @@ OAuth goal was to solve the issue of authorization. The main goals of modern aut
 Authorization is often mistaken with **Authentication**, which focuses around the user identity. Authentication helps the service to understand who the user is.
 
 
-## The authorization we are used to
+## The authorization we are used to - OAuth 2.0 usage examples
 Today OAuth becomes an industry standard. Users are getting used to modern authorization solutions.
 
 For instance, recently I passed a certificate. I was awarded with digital badge, available on _credly.com_. Credly enables users to share their achievements on LinkedIn. After I chose this option, Credly redirected me to LinkedIn, where I needed to enter credentials and allow Credly to post the content on LinkedIn on my behalf.
+
 ![credly-linkedin](/assets/img/article9/consent-credly-linkedin.PNG)
 
 Another example of OAuth implementation could be the Google Maps integration with Spotify. Google Maps can integrate with Spotify in order to pause the music for the moment when navigation is providing voice guidance. After integration is initiated in Google Maps Application, user is redirected to Spotify. Google is asking for allowance to perform following actions on Spotify on users behalf
 
-![credly-linkedin](/assets/img/article9/consent-googlemaps-spotify.jpg)
+![google-maps-spotify](/assets/img/article9/consent-googlemaps-spotify.jpg)
 
 ## OAuth 2.0 Roles
 OAuth 2.0 defines a handful of roles, taking part in the process of authorization:
@@ -121,29 +146,29 @@ Entire flow consists following steps:
 7. Authorization token can be used by the client to access user resources.
 
 ## Why Authorization Code Grant is so complex?
-One could think the entire procedure is way to complex, considering the fact its only goal is to provide an access token to the client. Though its complexity secures the flow and makes it more robust. 
-In Authorization code grant takes advantage of two separate communication channels.
+One could think the entire procedure is way to complex, considering the fact its only goal is to provide an access token to the client. However, its complexity secures the flow and makes it more robust. 
+Authorization code grant takes advantage of two separate communication channels.
 ### Front Channel
 Front channel can be defined as communication interface between client and authorization server performed using redirection in browser navigation bar. Client application redirects user to authorizations server, where user can authenticate and consent. Authorization server redirects user back to the client application with authorization code.
 #### Front channel is not secure medium. 
-Front-channel communication involves user browser which is running in the environment, that client application has no control over. If user does not protect the environment communication can be sniffed. Moreover URL redirections are stored in browser history where can be inspected.
+Front-channel communication involves user browser which is running in the environment, that client application has no control over. If user does not protect the environment, communication can be sniffed. Moreover URL redirections are stored in browser history where can be inspected.
 #### Front channel responsibility
-Apart from its disadvantages, front channel is a very important building block in Authorization Code Grant. Since it is based on browser redirection, it ensures that actual user authenticates and gives consent. It enables authorization server to include as many authentication steps as needed, e.g. multi factor authentication or captha.
+Apart from its disadvantages, front channel is a very important building block in Authorization Code Grant. Since it is based on browser redirection, it ensures that actual user authenticates and gives consent. It enables authorization servers to include as many authentication steps as needed, e.g. multi factor authentication or captha.
 Redirects allows client to have non-routable address. It is especially important for mobile or desktop applications. For instance, client application can be hosted on `localhost`. If localhost is specified as `redirect_uri`, local machine will be able to receive authorization code, after authorization server redirects user to `localhost` (with authorization code).
-## Back channel
-Back channel is secure channel. It is server to server communication between authorization server and client application server. If we consider standard web application (e.g. written in ASP.NET) there is a backend code running on the server, and frontend code running in client browser. Backend server establishes secure communication with authorization server.
-Thanks to back channel client application can securely provide a secret, in access token request, to authorization server, and securely receive an access token.
+### Back channel
+Back channel is secure channel. It is server to server communication between authorization server and client application server. Considering standard web application (e.g. written in ASP.NET) there is a backend code running on the server, and frontend code running in client browser. Backend server establishes secure communication with authorization server.
+Thanks to back channel client application can securely provide a secret, in access token request to authorization server, and securely receive an access token.
 
 ![authorization-code-grant-front-back-channel](/assets/img/article9/authorization-code-grant-front-back-channel.png)
 
 ## What about public clients?
 Public clients has some limitations comparing with confidential clients.
-1. **Public clients can't store client secret.** It is more the nature of public clients than limitation, however lack of client secret leads to some security tradeoffs. It is really important to mention that `client_secret` is an optional parameter in Authorization Code Grant, so in theory it can be applied to public clients, but 
+1. **Public clients can't store client secret.** It is more the nature of public clients than limitation, however lack of client secret leads to some security tradeoffs. It is really important to mention that `client_secret` is an optional parameter in Authorization Code Grant. In theory it can be applied to public clients as well, but 
 2. **Usually no secure channel available for public clients**
 3. **CORS (historically)**. Historically browser were not able to perform a cross origin request in js code. Due to CORS limitation, it was not possible to perform Authorization code grant flow. It requires HTTP POST request to authorization server located outside of client domain.
 
 ## Implicit grant
-Considering these limitations, OAuth 2.0 introduces simplified way to gather access token - Implicit grant. Authorization code is not exchanged for access token in implicit grant. Instead, access token is passed directly as parameter in redirection to `redirect_uri`.
+Considering above limitations, OAuth 2.0 introduces simplified way to gather access token - Implicit grant. Authorization code is not exchanged for access token in implicit grant. Instead, access token is passed directly as parameter in redirection to `redirect_uri`.
 In order to initiate implicit flow, client needs to provide `response_type=token` in authorization request.
 
 ![implicit-grant](/assets/img/article9/implicit-grant.png)
@@ -151,7 +176,7 @@ In order to initiate implicit flow, client needs to provide `response_type=token
 ### Implicit grant security tradeoffs
 Implicit grant flow provides simplified way for the client to gather access token. Though, there are some security considerations
 1. **Access token can be leaked.** Access token is provided to the client via front channel. It becomes easier to intercept in transit. Moreover, it is available in browser history. 
-If public client application wants to reuse access token, it usually stores it in browser cookie, from where it could be potentially stolen. Authorization server should serve short lived tokens, which are valid only for short period to minimize the ri
+If public client application wants to reuse access token, it usually stores it in browser cookie, from where it could be potentially stolen. Authorization server should serve short lived tokens, which are valid only for short period, to minimize the risk of unauthorized usage.
 2. **Malicious client obtains authorization.** Missing `client_secret` makes client application unable to proof its identity to authorization server. In order to prevent malicious client obtain access token, by using the same authorization server request as original client, server should validate `redirect_uri`. Redirection should be only possible to approved `redirect_uri`.
 3. **CSRF attack with attacker token**. Attacker can prepare same url as authorization server `redirect_url` and inject own access token into it. After user is tricked into navigating to prepared url, client application can access resource server on behalf of attacker, not original user. To prevent this attack client application should include `state` parameter, with non-guessable value, in authorization request, and validate if `state` parameter is present with the same value in authorization server redirection parameters. This type of attack can be mitigated using PKCE.
 
@@ -163,9 +188,9 @@ Client registration is a process o building trust between client and authorizati
 * client type - based on that authorization server should decide if `client_secret` should be associated with client
 * any other information that identifies or describes client application, like name, image, legal terns etc.
 
-> **_NOTE_:** The way of providing these information to authorization server is outside of OAuth 2.0 documentation scope. Client registration can be usually performed by client application developer. Some authorization servers supports dynamic registration approach so client can self-register.
+> **_NOTE_:** The way of providing these information to authorization server is outside of OAuth 2.0 documentation scope. Client registration can be usually performed by client application developer. Some authorization servers supports dynamic registration approach to enable client self-registration.
 
-From client application perspective registration process provides `client_id` and optionally `client_secret`. Moreover `redirect_uri`s should be limited to uris used belongs to client.
+From client application perspective registration process provides `client_id` and optionally `client_secret`. Moreover it limits the scope `redirect_uri` to approved ones.
 
 ![client-registration](/assets/img/article9/client-registration.PNG)
 
