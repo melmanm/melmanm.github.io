@@ -102,9 +102,9 @@ It is important to note that OAuth 2.0 distinguish two types of clients:
 
 ### Authorization Server
 ![authorization-server](/assets/img/article9/authorization-server.png)
-Server that issues access tokens to client.
 
-Depends on application it is possible that resource server and authorization server are provided by the same party. OAuth 1.0 did not distinguish these roles, but OAuth 2.0 becomes more flexible by separating these roles. There are multiple use cases, where authorization server and resource server are provided by different parties.
+Server that issues access tokens to client.
+Depends on use case, it is possible that resource server and authorization server are provided by the same party. OAuth 1.0 did not distinguish these roles, but OAuth 2.0 becomes more flexible by separating these roles. There are multiple use cases, where authorization server and resource server are provided by different parties.
 
 ## Authorization Code Grant 
 Authorization Code Grant allows third party application to securely access users resources on their behalf.
