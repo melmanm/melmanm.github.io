@@ -10,20 +10,21 @@ cover-img: /assets/img/article9/token.png
 ---
 
 Application wants to access your account! Permission requested – application would like to read your profile and calendar!
-OAuth 2.0 is an authorization protocol that simplifies accessing user’s resources in modern applications 
-In this article we will dive into OAuth 2.0 protocol from application developer and user perspective, presenting how modern applications provides effortless login, empowers APIs integration, boosting users trust while accessing their data.
+OAuth 2.0 is an authorization protocol that simplifies accessing user’s resources in modern applications.
+This article explains into OAuth 2.0 protocol from application developer, presenting how modern applications provides effortless login, empowers APIs integration, boosting users trust while accessing their data.
 
-> This article is created as written form of a presentation that I have pleasure to present recently.
+> This article is created as written form of a presentation that I had a pleasure to present recently.
 
 ## Back in 2007
-To understand the need for authorization framework, we would need to go back in time to 2007, when OAuth 1.0 was being created. Just to give you the best feeling I need to mention that 2007 was the year of IPhone 1 premiere, it was the year when Google get interested in Android OS, and mySpace was at its prime. 
+To understand the need for authorization framework, we need to go back to year 2007, when OAuth 1.0 was being created. Just to give you the best feeling I need to mention that 2007 was the year of IPhone 1 premiere, it was the year when Google get interested in Android OS, and mySpace was at its prime. 
 Back then web applications strived to provide integration with 3rd party services.
+
 For instance, facebook introduced a feature enabling users to invite all friends from their gmail contact list, by sending an invitation email to them all.
-In order to do so, facebook requires user to enter gmail credentials on facebook site. Then, facebook used these credentials to log into gmail on user behalf and send invitation emails. 
-The way of how user authorized facebook to access user's gmail resources, is today considered as anti-pattern. User never knows, if authorized service uses given credentials only in the way it promises (having gmail credentials services gets full access to user's account), or if credentials are not leaked by authorized service.
+In order to do so, facebook required user to enter gmail credentials on facebook site. Then, facebook used these credentials to log into gmail on user behalf and send invitation emails. 
+The way of how user authorized facebook to access user's gmail resources, is today considered as anti-pattern. In general, user never knows, if authorized service uses given credentials only in the way it promises (having gmail credentials services gets full access to user's account). Moreover, user cannot assume credentials are stored securely by authorized service.
 
 ## The need of authorization protocol
-OAuth goal was to solve the issue of authorization. The main goals of modern authorization was
+OAuth goal was to solve the issue of authorization. The main goals of modern authorization was to:
 * Provide a process for end user to authorize third-party access to their resources without sharing their credentials.
 * Provide a method for applications to access resources on behalf of user.
 * Provide granular levels (scopes) of third-party application access to user resources, which user can consent to.
@@ -32,16 +33,19 @@ OAuth goal was to solve the issue of authorization. The main goals of modern aut
 
 
 ## What Authorization means?
-**Authorization** focuses around an access to resources. Authorization process verifies if resources can be accessed or not. In case of authorization service does not consider user identity, just the access rights. Unlocking your house front door is good authorization example. Doors are not really verifying your identity. In order to open them you need put a key, that provides an access. Note that others can unlock the door by using the same key.
+**Authorization** focuses around an access to resources. Authorization process verifies if resources can be accessed or not. In case of authorization service does not consider user identity, just the access rights. Unlocking front door of our houses is good example of authorization. Doors are not verifying the identity of person who is trying to open it. The key is what is verified. Note that others can unlock the door by using the same key.
 
 Authorization is often mistaken with **Authentication**, which focuses around the user identity. Authentication helps the service to understand who the user is.
 
 
 ## The authorization we are used to
 Today OAuth becomes an industry standard. Users are getting used to modern authorization solutions.
-Recently I passed a certificate. I was awarded with digital badge, available on _credly.com_. Credly enables users to share their achievements on LinkedIn. After I chose this option, Credly redirected me to linkedin, where I needed to enter credentials and allow Credly to post the content on LinkedIn on my behalf.
+
+For instance, recently I passed a certificate. I was awarded with digital badge, available on _credly.com_. Credly enables users to share their achievements on LinkedIn. After I chose this option, Credly redirected me to LinkedIn, where I needed to enter credentials and allow Credly to post the content on LinkedIn on my behalf.
 ![credly-linkedin](/assets/img/article9/consent-credly-linkedin.PNG)
-Another example of OAuth usage is Google Maps integration with Spotify. Google Maps can integrate with Spotify in order to pause the music for the moment when navigation is providing voice guidance. After integration is initiated in Google Maps Application, user is redirected to Spotify. Google is asking for allowance to perform following actions on Spotify on users behalf
+
+Another example of OAuth implementation could be the Google Maps integration with Spotify. Google Maps can integrate with Spotify in order to pause the music for the moment when navigation is providing voice guidance. After integration is initiated in Google Maps Application, user is redirected to Spotify. Google is asking for allowance to perform following actions on Spotify on users behalf
+
 ![credly-linkedin](/assets/img/article9/consent-googlemaps-spotify.jpg)
 
 ## OAuth 2.0 Roles
@@ -57,6 +61,7 @@ Server containing protected resources owned by resource owner. Able to accept th
 ![access-token](/assets/img/article9/token.png)
 Representation of authorized access to specific resources. Describes access level to specific resources.
 > **_NOTE:_** According to specification token is not OAuth 2.0 role, however it was included here for better understanding of OAuth roles.
+
 ### Client
 ![client](/assets/img/article9/client.png)
 Application making requests for protected resources on behalf of resource owner. Access token is opaque to the client. Client retrieves the access token and uses it to access to resource server but it does not validate or check its content.
@@ -68,7 +73,7 @@ It is important to note that OAuth 2.0 distinguish two types of clients:
 ![authorization-server](/assets/img/article9/authorization-server.png)
 Server that issues access tokens to client.
 
-Depends on application it is possible that resource server and authorization server is provided by the same party. OAuth 1.0 did not distinguish these roles at all. OAuth 2.0 becomes more flexible by separating these roles. There are many applications where authorization server and resource server are provided by different parties.
+Depends on application it is possible that resource server and authorization server are provided by the same party. OAuth 1.0 did not distinguish these roles, but OAuth 2.0 becomes more flexible by separating these roles. There are multiple use cases, where authorization server and resource server are provided by different parties.
 
 ## Authorization Code Grant 
 Authorization Code Grant allows third party application to securely access users resources on their behalf.
@@ -86,7 +91,7 @@ Entire flow consists following steps:
    &scope={access_scope}
    ```
    | parameter | description |
-   |:--- | :--- |
+   | :--- | :--- |
    |`client_id`| represents unique client identifier that is assigned to the client during registration process (which will be described later in this article) |
    |`redirect_uri`| specifies an address (client address) to which user will be redirected to after authentication and consent on authorization server. **For security reasons redirect uri should be restricted only to uris approved by client developer.** Approved uris can be configured during client registration process. |
    |`response_type`| it specifies the way of authorization server response. In case of Authorization Code Grant it must be `code` |
