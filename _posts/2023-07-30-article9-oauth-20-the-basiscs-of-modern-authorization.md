@@ -78,17 +78,23 @@ OAuth 2.0 defines a handful of roles, taking part in the process of authorizatio
 
 ### Resource owner
 ![resource-owner](/assets/img/article9/user.png)
+
 An entity able to grant an access to resources. Usually user.
+
 ### Resource server
 ![resource-server](/assets/img/article9/resource-server.png)
+
 Server containing protected resources owned by resource owner. Able to accept the resource request using provided access token.
+
 ### Access Token *
 ![access-token](/assets/img/article9/token.png)
+
 Representation of authorized access to specific resources. Describes access level to specific resources.
 > **_NOTE:_** According to specification token is not OAuth 2.0 role, however it was included here for better understanding of OAuth roles.
 
 ### Client
 ![client](/assets/img/article9/client.png)
+
 Application making requests for protected resources on behalf of resource owner. Access token is opaque to the client. Client retrieves the access token and uses it to access to resource server but it does not validate or check its content.
 It is important to note that OAuth 2.0 distinguish two types of clients:
 * Confidential - able to store securely store a secret, e.g. classic web application which backend code is running in secure environment.
