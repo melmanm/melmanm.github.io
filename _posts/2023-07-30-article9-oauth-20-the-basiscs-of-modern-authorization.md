@@ -93,7 +93,7 @@ Entire flow consists following steps:
    | parameter | description |
    | :--- | :--- |
    |`client_id`| represents unique client identifier that is assigned to the client during registration process (which will be described later in this article) |
-   |`redirect_uri`| specifies an address (client address) to which user will be redirected to after authentication and consent on authorization server. **For security reasons redirect uri should be restricted only to uris approved by client developer.** Approved uris can be configured during client registration process. |
+   |`redirect_uri`| specifies an address (client address) to which user will be redirected to after authentication and consent on authorization server. **For security reasons redirect uri should be restricted only to approved uris, which belongs to client applications** Approved uris can be configured during client registration process. |
    |`response_type`| it specifies the way of authorization server response. In case of Authorization Code Grant it must be `code` |
    |`scope`| defines the resources and access level which client application is trying to access. For instance if client application tries to get readonly access to user gmail email the scope is https://www.googleapis.com/auth/gmail.readonly. Scope can include multiple, space delimited, entries. |
 3. User authenticates to authorization server and allows/denies access to the resources defined by `scope`.
