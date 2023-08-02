@@ -83,7 +83,7 @@ Authorization Code Grant allows third party application to securely access users
 Entire flow consists following steps:
 1. User initiates authorization flow in client application.
 2. Client redirects user to authorization server providing following parameters in http call
-   ```http
+   ```
    https://{authorization_server}/authorize?
    client_id={client_id}
    &redirect_uri=https://{client_url}
@@ -99,7 +99,7 @@ Entire flow consists following steps:
 3. User authenticates to authorization server and allows/denies access to the resources defined by `scope`.
 4. Authorization server generates authorization code and redirects to redirect_uri with authorization code as a parameter
 5. Client application sends the authorization code to the authorization server in order to exchange it for a token
-   ```http
+   ```
    POST https://{authorization_server}/token?
    client_id={client_id}
    &client_secret={client_secret}
