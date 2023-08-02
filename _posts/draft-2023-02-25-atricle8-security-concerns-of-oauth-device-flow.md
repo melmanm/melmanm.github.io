@@ -5,7 +5,7 @@ Device authorization grant enables applications with limited user input or displ
 * Smart TV's - even if some smart tvs have a browser installed, input capabilities are very limited, and usually user needs to enter text using remote control.
 * console applications - since console applications can be run in text-based used interface, there is usually no guarantee that it will be possible to launch browser and perform authorization with authorization code grant or implicit flow .
 
-Device Authorization Grant flow requires a secondary device, like smartphone or pc, which user can use to perform authorization. Below diagram presents device authorization grant flow:
+Device Authorization Grant flow requires a secondary device, like smartphone or PC, which user can use to perform authorization. Below diagram presents device authorization grant flow:
 
 ## Non-textual verification uri QR
 QR code can 
