@@ -94,9 +94,9 @@ Entire flow consists following steps:
    | parameter | description |
    | :--- | :--- |
    |`client_id`| represents unique client identifier that is assigned to the client during registration process (which will be described later in this article) |
-   |`redirect_uri`| specifies an address (client address) to which user will be redirected to after authentication and consent on authorization server. **For security reasons redirect uri should be restricted only to approved uris, which belongs to client applications** Approved uris can be configured during client registration process. |
-   |`response_type`| it specifies the way of authorization server response. In case of Authorization Code Grant it must be `code` |
-   |`scope`| defines the resources and access level which client application is trying to access. For instance if client application tries to get readonly access to user gmail email the scope is https://www.googleapis.com/auth/gmail.readonly. Scope can include multiple, space delimited, entries. |
+   |`redirect_uri`| specifies an address (client address) to which user will be redirected after authentication and consent on authorization server. **For security reasons redirect uri should be restricted only to approved uris, which belongs to client applications.** Approved uris can be configured during client registration process. |
+   |`response_type`| specifies the way of authorization server response. In case of Authorization Code Grant it must be `code` |
+   |`scope`| defines the resources (and access levels) which client application is trying to access. For instance if client application wants to get readonly access to user's gmail emails, the scope should be https://www.googleapis.com/auth/gmail.readonly. Scope can include multiple, space delimited, entries. |
 
 3. User authenticates to authorization server and allows/denies access to the resources defined by `scope`.
 4. Authorization server generates authorization code and redirects to redirect_uri with authorization code as a parameter
@@ -113,10 +113,10 @@ Entire flow consists following steps:
    | parameter | description |
    |:--- | :--- |
    |`client_secret`| applies only for confidential clients, represents client password that is assigned for the client during registration process (which will be described later in this article)|
-   |`redirect_ur`| needs to be identical as in initial authorization request |
+   |`redirect_uri`| needs to be identical as in initial authorization request |
    |`grant_type`| in case of Authorization Code Grant it must be  `authorization_code`|
    |`code`| authorization code received by the client in step 4. reflecting rights consent by the user in step 3.|
-   
+
 6. Authorization server responds with access token available in the response body
 7. Authorization token can be used by the client to access user resources.
 
