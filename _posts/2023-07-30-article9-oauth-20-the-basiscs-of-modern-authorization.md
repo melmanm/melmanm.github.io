@@ -43,8 +43,8 @@ This article explains into OAuth 2.0 protocol from application developer, presen
 To understand the need for authorization framework, we need to go back to year 2007, when OAuth 1.0 was being created. Just to give you the best feeling I need to mention that 2007 was the year of IPhone 1 premiere, it was the year when Google get interested in Android OS, and mySpace was at its prime. 
 Back then web applications strived to provide integration with 3rd party services.
 
-For instance, facebook introduced a feature enabling users to invite all friends from their gmail contact list, by sending an invitation email to them all.
-In order to do so, facebook required user to enter gmail credentials on facebook site. Then, facebook used these credentials to log into gmail on user behalf and send invitation emails. 
+For instance, facebook introduced a feature enabling users to invite all friends from their gmail contact list.
+In order to do so, facebook required user to enter gmail credentials on facebook site. Then, facebook used these credentials to log into gmail on user behalf, read the contact list and see if there are any users with these emails signed up in Facebook. You could invite them as friends. 
 The way of how user authorized facebook to access user's gmail resources, is today considered as anti-pattern. In general, user never knows, if authorized service uses given credentials only in the way it promises (having gmail credentials services gets full access to user's account). Moreover, user cannot assume credentials are stored securely by authorized service.
 
 ## The need of authorization protocol
