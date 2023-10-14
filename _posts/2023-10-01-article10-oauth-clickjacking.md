@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OAuth clickjacking attack (with example)"
+title: "OAuth clickjacking attack explained (with example)"
 categories: misc
 tags:
 - OAuth2.0
