@@ -24,9 +24,16 @@ This article explains into OAuth 2.0 protocol from application developer, presen
 - [What Authorization means?](#what-authorization-means)
 - [The authorization we are used to - OAuth 2.0 usage examples](#the-authorization-we-are-used-to---oauth-20-usage-examples)
 - [OAuth 2.0 Roles](#oauth-20-roles)
+  - [Resource owner](#resource-owner)
+  - [Resource server](#resource-server)
+  - [Access Token \*](#access-token-)
+  - [Client](#client)
+  - [Authorization Server](#authorization-server)
 - [Authorization Code Grant](#authorization-code-grant)
 - [Why Authorization Code Grant is so complex?](#why-authorization-code-grant-is-so-complex)
   - [Front Channel](#front-channel)
+    - [Front channel is not secure medium.](#front-channel-is-not-secure-medium)
+    - [Front channel responsibility](#front-channel-responsibility)
   - [Back channel](#back-channel)
 - [What about public clients?](#what-about-public-clients)
 - [Implicit grant](#implicit-grant)
@@ -210,11 +217,10 @@ represent specific scopes and durations of access, granted by the
 resource owner, and enforced by the resource server and authorization
 server.
 
-There are two general types of access tokens:
+There are multiple types and structures of access tokens. Access token can be differentiated for instance based on its content:
+
 ### Reference access token
-Reference access can be consider as a database key, which is associated with granted permissions. Authorization server saves every generated access token, with corresponding permissions.
-Generated token is passed to the client and eventually to resource server. Reference token is completely opaque to the client since it represents a reference to some data that client can't access.
-Resource server needs to access the original database in order to get permissions, related with access token, and validate the client request.
+Reference access can be consider as a database key, which is associated with granted permissions. Authorization server saves every generated access token, with corresponding permissions. Generated token is passed to the client and eventually to resource server. Reference token is completely opaque to the client since it represents a reference to some data that client can't access. Resource server needs to access the original database in order to get permissions, related with access token, and validate the client request.
 
 ![reference-token](/assets/img/article9/reference-token.PNG)
 
@@ -223,7 +229,7 @@ In contrast with reference tokens, self contained tokens are not pointing to per
 
 ![reference-token](/assets/img/article9/self-contained-token.PNG)
 
-JWT (JSON Web Tokens) is the most popular implementation of self contained access token. JWT defines a structure and encoding of access token. It provides mechanism that protects token from being modified in transit.
+JWT (JSON Web Tokens) is the most popular implementation of self contained access token. JWT defines a structure and encoding of access token. It provides mechanism to check the token consistency, which protects the token from being tampered in transit.
 
 ## Other OAuth 2.0 grants
 Besides Authorization Code and Implicit grants OAuth 2.0 proposes

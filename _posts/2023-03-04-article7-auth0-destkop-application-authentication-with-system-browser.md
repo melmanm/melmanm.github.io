@@ -11,10 +11,10 @@ cover-img: /assets/img/article7/cover.jpg
 
 In [previous article](https://melmanm.github.io/misc/2023/02/13/article6-oauth20-authorization-in-desktop-applicaions.html) I described general ideas on how to integrate OAuth 2.0 authorization and authentication with desktop applications. In this article I will describe how to implement authentication in .NET desktop application with Auth0, using default system browser to perform user's login and logout actions.
 
-
+## Table of contents <!-- omit from toc -->
 - [Auth0 nuget packages](#auth0-nuget-packages)
-  - [Default implementation.](#default-implementation)
-- [Display auth0 login form in system browser](#display-auth0-login-form-in-system-browser)
+  - [Default implementation](#default-implementation)
+- [Display Auth0 login form in system browser](#display-auth0-login-form-in-system-browser)
   - [Desired architecture](#desired-architecture)
   - [Custom IBrowser implementation](#custom-ibrowser-implementation)
   - [Implementation considerations](#implementation-considerations)
@@ -44,7 +44,7 @@ var userClaims = loginResult.User.Claims;
 
 `Auth0ClientOptions`class includes `IBrowser Browser {get; set;}` property. `IBrowser` implementation takes responsibility of displaying login screen to the user. Additionally, it is used to perform user logout process.
 
-### Default implementation. 
+### Default implementation
 By default, Auth0 nuget package uses `WebViewBrowser` implementation of `IBrowser` interface. It makes use of [`WebViewCompatible`](https://learn.microsoft.com/en-us/windows/communitytoolkit/controls/wpf-winforms/webviewcompatible) framework component, to display login form to the user.
 `WebViewBrowser` renders html login page in new application window
 ![auth0-default-login](/assets/img/article7/auth0-inapp-login.png)
