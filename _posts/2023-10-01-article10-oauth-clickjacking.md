@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "OAuth clickjacking attack (with the example)"
+title: "OAuth clickjacking attack (with example)"
 categories: misc
 tags:
 - OAuth2.0
@@ -131,6 +131,6 @@ Because of that some authorization servers leave the configuration of `X-Frame-O
 However, since clickjacking attack is very hard to detect and can be very harmful for the user, majority of Authorization Servers do not enable application developer to configure `X-Frame-Options:` header value. `X-Frame-Options: DENY` header is always included in the Authorization Server's HTTP responses, which include html pages (especially login and consent page).
 
 ## About the examples
-Examples presented in this article was developed using Auth0 as an Authorization Server. As for now Auth0 supports two models of user's login and authorization experience. New - `New Universal Login`, and old (no new features added) `Classic Universal Login`. `New Universal Login` [(read more)](https://auth0.com/docs/authenticate/login/auth0-universal-login/new-universal-login-vs-classic-universal-login). `X-Frame-Options:` header value can be configured by application developer only in `Classic Universal Login` mode, using `Settings->Advanced->Migrations->Disable clickjacking protection for Classic Universal Login` option.
+Examples presented in this article was created using Auth0 as an Authorization Server. As for now Auth0 supports two models of user's login and authorization experience. New - `New Universal Login`, and old (no new features added) `Classic Universal Login`. `New Universal Login` [(read more)](https://auth0.com/docs/authenticate/login/auth0-universal-login/new-universal-login-vs-classic-universal-login). `X-Frame-Options:` header value can be configured by application developer only in `Classic Universal Login` mode, using `Settings->Advanced->Migrations->Disable clickjacking protection for Classic Universal Login` option [(read more)](https://auth0.com/docs/troubleshoot/product-lifecycle/past-migrations/clickjacking-protection-for-universal-login).
 
 ![auth0-clickjacking-protection](/assets/img/article10/auth0-clickjacking-protection.png)
