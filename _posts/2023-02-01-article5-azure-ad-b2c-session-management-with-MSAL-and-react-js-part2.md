@@ -19,6 +19,7 @@ As the article goal is to inspect session management from application perspectiv
 ---
 
 ## Table of contents
+- [Table of contents](#table-of-contents)
 - [Front-channel logout](#front-channel-logout)
 - [Configuration of Azure AD B2C](#configuration-of-azure-ad-b2c)
 - [MSAL and React.js configuration](#msal-and-reactjs-configuration)
@@ -57,6 +58,7 @@ To enable front-channel logout in Azure AD B2C, following steps needs to be done
     Custom policy *UserJourney* needs to be decorated with *UserJourneyBehaviors*.
     *  Scope of *SingleSignOn* can be set to **Tenant**, **Application** or **Policy**. 
     * *EnforceIdTokenHint* option is required, so the current user context is always passed within /logout request to Azure AD B2C. Note that front-channel logout is supported only with Custom Policies. 
+  
     ```xml
     <UserJourneyBehaviors> 
         <SingleSignOn Scope="Tenant" EnforceIdTokenHintOnLogout="true"/> 
