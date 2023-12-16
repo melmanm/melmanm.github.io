@@ -1,10 +1,11 @@
 ---
 layout: post
-title: "Entra ID (Azure Ad) app registration - client secret vs certificate. What to choose?"
+title: "Entra ID (Azure AD) app registration - client secret vs certificate. What to choose?"
 categories: misc
 tags:
 - OAuth2.0
 - Azure AD
+- Entra ID
 - Active Directory
 - OAuth
 - client_secret
