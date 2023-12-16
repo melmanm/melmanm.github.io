@@ -92,4 +92,4 @@ Because of that, Microsoft recommends using certificates over `client_secret`.
 
 > _We strongly recommend that you use x509 certificates issued by Trusted Certificate Authority as the only credential type for getting tokens for your application._
 > 
-> ~ https://devblogs.microsoft.com/microsoft365dev/client-secret-expiration-now-limited-to-a-maximum-of-two-years/
+> ~ [https://devblogs.microsoft.com/microsoft365dev/client-secret-expiration-now-limited-to-a-maximum-of-two-years/](https://devblogs.microsoft.com/microsoft365dev/client-secret-expiration-now-limited-to-a-maximum-of-two-years/)
