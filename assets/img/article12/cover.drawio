@@ -1,0 +1,22 @@
+<mxfile host="Electron" modified="2023-12-03T16:59:30.943Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/22.1.2 Chrome/114.0.5735.289 Electron/25.9.4 Safari/537.36" etag="lgfSKxHnoFv_XuZUKsNJ" version="22.1.2" type="device">
+  <diagram name="Strona-1" id="GYscOLxZoOCRxYdRZqo8">
+    <mxGraphModel dx="717" dy="534" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="QqqzZRxdw1TkswMepXf1-2" value="" style="points=[[0,0.5,0],[0.24,0,0],[0.5,0.28,0],[0.995,0.475,0],[0.5,0.72,0],[0.24,1,0]];verticalLabelPosition=bottom;sketch=0;html=1;verticalAlign=top;aspect=fixed;align=center;pointerEvents=1;shape=mxgraph.cisco19.key;fillColor=#3399FF;strokeColor=none;rotation=0;" vertex="1" parent="1">
+          <mxGeometry x="450" y="332.25" width="124.16" height="55.87" as="geometry" />
+        </mxCell>
+        <mxCell id="QqqzZRxdw1TkswMepXf1-4" value="" style="points=[[0.015,0.015,0],[0.25,0,0],[0.5,0,0],[0.75,0,0],[0.985,0.015,0],[1,0.22,0],[1,0.44,0],[1,0.67,0],[0.985,0.89,0],[0,0.22,0],[0,0.44,0],[0,0.67,0],[0.015,0.89,0],[0.25,0.91,0],[0.5,0.91,0],[0.785,0.955,0]];verticalLabelPosition=bottom;sketch=0;html=1;verticalAlign=top;aspect=fixed;align=center;pointerEvents=1;shape=mxgraph.cisco19.x509_certificate;fillColor=#3399FF;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="630" y="306.28" width="113.48" height="107.81" as="geometry" />
+        </mxCell>
+        <mxCell id="QqqzZRxdw1TkswMepXf1-8" value="" style="endArrow=none;html=1;rounded=0;strokeWidth=3;strokeColor=#CCCCCC;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="600" y="420.19" as="sourcePoint" />
+            <mxPoint x="600" y="300.19" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
