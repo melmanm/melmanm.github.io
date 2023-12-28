@@ -2,4 +2,5 @@
 
 * CAE with Azure AD and .net
 * WPF and TextBox filtering (decimal number)
-* Azure AD cert thumbprint
+* OAuth Authorization in ASP.NET in details
+* Azure AD certificate vs client_secret
