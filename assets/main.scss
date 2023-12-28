@@ -5,16 +5,17 @@
 @import "minima";
 
 // Add logo to masthead
-// .site-title::before {
-//     content: "";
-//     display: inline-block;
-//     background-size: 40px 40px;
-//     position: relative;
-//     width: 40px;
-//     background-image: url(img/logo.png);
-//     height: 40px;
-//     top: 5px;
-// }
+.site-title::before {
+     content: "";
+     display: inline-block;
+     background-size: 40px 40px;
+     position: relative;
+     width: 40px;
+     background-image: url(img/logo.png);
+     height: 40px;
+     top: 5px;
+}
+
 .site-header {
     border-top: 0px;
 }
