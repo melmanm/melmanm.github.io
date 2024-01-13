@@ -8,7 +8,7 @@ tags:
 - dotnet
 - .NET
 - C#
-cover-img: /assets/img/article13/ultra-wide-screen-share.png
+cover-img: /assets/img/article13/cover.png
 ---
 
 In this article i will describe how to create custom Winforms window, which can be resized, dragged, and snapped, providing the same experience as standard windows window.
