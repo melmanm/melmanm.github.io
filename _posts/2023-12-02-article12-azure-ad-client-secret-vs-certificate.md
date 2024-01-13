@@ -15,6 +15,17 @@ cover-img: /assets/img/article12/cover.png
 
 In this article I will compare two methods, which can be used by this client application prove its identity to Entra ID (Azure AD) in the process of OAuth authorization.
 
+## Table of contents <!-- omit from toc -->
+
+- [Introduction](#introduction)
+- [Client credential in Entra ID App registration](#client-credential-in-entra-id-app-registration)
+- [client\_secret as client credential](#client_secret-as-client-credential)
+- [Certificate as client credential](#certificate-as-client-credential)
+  - [Client assertion](#client-assertion)
+  - [Signature](#signature)
+- [Security](#security)
+
+
 ## Introduction
 
 In the process of OAuth authorization client application can prove its identity to Authorization Server (e.g. Entra ID) by presenting some secret asset (which only the client application can be in possession of). From now on lets call this secret asset **client credential**.

@@ -19,7 +19,16 @@ What motivates developer to create custom Winforms window is, in most cases, an 
 
 I decided to create this article, since I didn't find any comprehensive material covering the topic.
 
-## Removing window tittle bar and borders
+## Table of contents <!-- omit from toc -->
+- [Removing default window tittle bar and borders](#removing-default-window-tittle-bar-and-borders)
+- [Window dragging](#window-dragging)
+  - [ReleaseCapture](#releasecapture)
+  - [SendMessage](#sendmessage)
+- [Window resizing](#window-resizing)
+- [Window snapping to the screen edges](#window-snapping-to-the-screen-edges)
+
+
+## Removing default window tittle bar and borders
 In order to design custom window we need get rid of default windows tittle bar and border. It can be done by setting Form's `FormBorderStyle` property.
 
 ```csharp
@@ -66,7 +75,7 @@ Normally the the mouse is captured by the control, after user presses mouse butt
 
 ![dragging-gif](/assets/img/article13/dragging-gif.gif)
 
-## Window Resizing
+## Window resizing
 After applying `FormBorderStyle.None` style, window lost borders and the ability to use them to for resizing.
 
 In order to bring back resizing functionality, we will try to capture `WM_NCHITTEST` message.`WM_NCHITTEST` message is sent by the system to Winforms form, whenever cursor moves or mouse button is clicked. System sends this message to the Winforms form, expecting window to respond. Winforms form response contains an information about the window element which is currently pointed by the cursor.
@@ -102,7 +111,7 @@ protected override void WndProc(ref Message m)
 
 ![resizing-gif](/assets/img/article13/resizing-gif.gif)
 
-## Window snapping to edges of the screen
+## Window snapping to the screen edges
 
 After applying `FormBorderStyle.None` style, window lost the ability to snap to screen edges.
 
