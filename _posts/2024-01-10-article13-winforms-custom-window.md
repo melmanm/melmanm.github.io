@@ -90,10 +90,10 @@ const int HTRIGHT = 11;
 const int BorderSize = 4;
 protected override void WndProc(ref Message m)
 {
+    base.WndProc(ref m);
+    
     if (m.Msg == WM_NCHITTEST)
     {
-        base.WndProc(ref m);
-
         //cursor position
         var cursorPosition = PointToClient(Cursor.Position);
         //border area
