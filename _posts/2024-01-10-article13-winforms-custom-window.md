@@ -8,14 +8,14 @@ tags:
 - dotnet
 - .NET
 - C#
-cover-img: /assets/img/article13/cover.png
+cover-img: /assets/img/article13/cover-background.png
 ---
 
 In this article i will describe how to create custom Winforms window, which can be resized, dragged, and snapped, providing the same experience as standard Windows window.
 
 What motivates developer to create custom Winforms window is, in most cases, an application window design. Standard windows window is configurable to some extend, however not all features are supported or easy to implement. For instance, in my recent project I designed a window with title bar and navigation buttons placed inside the kind of centered "notch".
 
-![ultra-wide-screen-share](/assets/img/article13/cover.png)
+![ultra-wide-screen-share](/assets/img/article13/cover-background.png)
 
 I decided to create this article, since I didn't find any comprehensive material covering the topic.
 
@@ -163,3 +163,4 @@ By handling `WM_NCCALCSIZE` and `WM_NCACTIVATE` messages, we can prevent from dr
 Now the snapping functionality is in place.
 
 ![window-snapping](/assets/img/article13/snapping-gif.gif)
+
