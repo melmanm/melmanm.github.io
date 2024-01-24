@@ -4,5 +4,6 @@
 * WPF and TextBox filtering (decimal number)
 * OAuth Authorization in ASP.NET in details
 * Azure AD certificate vs client_secret [x]
-* Azure B2C refresh token
+* Azure AD refresh token
+* WPF understanding dependency property (memory, change notification, inheritance, value providers)
 
