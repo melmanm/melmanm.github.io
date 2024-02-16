@@ -3,3 +3,6 @@ title: Michał Silski's blog
 show_excerpts: true
 feed_show_tags: true
 google_site_verification: 3lmLmzW6dcrWdh5CfLl0tcpp4k5ThWGP9E9BOlfsz2Y
+collections:
+  projects:
+    output: true
