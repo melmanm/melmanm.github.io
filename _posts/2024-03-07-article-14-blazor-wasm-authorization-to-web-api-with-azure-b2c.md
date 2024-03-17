@@ -33,7 +33,7 @@ In scope of this article we will:
   - [Setting up demo application](#setting-up-demo-application-1)
     - [1. CORS Policy](#1-cors-policy)
     - [2. Fix template generator bug](#2-fix-template-generator-bug)
-- [Blazor application obtains the authorization to the Web API](#blazor-application-obtains-the-authorization-to-the-web-api)
+- [Blazor application obtains authorization to the Web API](#blazor-application-obtains-authorization-to-the-web-api)
   - [HttpClient that obtains access token](#httpclient-that-obtains-access-token)
   - [In case of System.InvalidOperationException: The inner handler has not been assigned.](#in-case-of-systeminvalidoperationexception-the-inner-handler-has-not-been-assigned)
   - [AuthorizationMessageHandler accesses API](#authorizationmessagehandler-accesses-api)
@@ -137,7 +137,7 @@ var scopeRequiredByApi = app.Configuration["AzureAdB2C:Scopes"] ?? "";
 
 it is required, since the `appSettings.json` section related with Azure AD B2C settings is named `AzureAdB2C`.
 
-## Blazor application obtains the authorization to the Web API
+## Blazor application obtains authorization to the Web API
 
 Now, let's focus on how to enable blazor application to obtain the access token from Azure AD B2C, and use it to request data from Web API `/weatherforecast` endpoint.
 
