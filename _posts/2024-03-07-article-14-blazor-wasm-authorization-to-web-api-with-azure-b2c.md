@@ -30,9 +30,9 @@ In scope of this article we will:
   - [Testing the application](#testing-the-application)
 - [Setting up WebAPI](#setting-up-webapi)
   - [Creating Azure AD B2C app registration](#creating-azure-ad-b2c-app-registration-1)
-- [Setting up demo application](#setting-up-demo-application-1)
-  - [1. CORS Policy](#1-cors-policy)
-  - [2. Fix template generator bug](#2-fix-template-generator-bug)
+  - [Setting up demo application](#setting-up-demo-application-1)
+    - [1. CORS Policy](#1-cors-policy)
+    - [2. Fix template generator bug](#2-fix-template-generator-bug)
 - [Blazor application obtains the authorization to the Web API](#blazor-application-obtains-the-authorization-to-the-web-api)
   - [HttpClient that obtains access token](#httpclient-that-obtains-access-token)
   - [In case of System.InvalidOperationException: The inner handler has not been assigned.](#in-case-of-systeminvalidoperationexception-the-inner-handler-has-not-been-assigned)
@@ -83,7 +83,7 @@ The process of creating Azure AD B2C app registration for web API application is
 
 [Grant permissions](https://learn.microsoft.com/en-us/azure/active-directory-b2c/add-web-api-application?tabs=app-reg-ga#grant-permissions) paragraph shows how to grant blazor application permissions to `demo.read` and `demo.write` scopes. Once steps from this paragraph are completed, blazor application user's are able to obtain the authorization to Web API protected endpoints which require `demo.read` and `demo.write` scopes.
 
-## Setting up demo application
+### Setting up demo application
 
 Now, let's create Web API application. Again, we will use dotnet cli to pre-configure web api with Azure AD B2C settings. Fill the placeholders with your tenant and application data, before executing the command,
 
@@ -102,7 +102,7 @@ The dotnet cli command creates OAuth enabled Web API, pre-configured with your A
 
 Before running Web API project, there are two required adjustments:
 
-### 1. CORS Policy
+#### 1. CORS Policy
 
 By default WebAPI server implements `same-origin` CORS policy. It means, Web API can only accept traffic from the domain it is hosted on. It prevents other (potentially malicious) applications from getting responses from Web API. To enable blazor application to get responses from Web API, policy must be loosened a little. Navigate to `Program.cs` and add following code.
 
@@ -121,7 +121,7 @@ builder.Services.AddCors(options =>
 app.UseCors(MyAllowSpecificOrigins);
 ```
 
-### 2. Fix template generator bug
+#### 2. Fix template generator bug
 
 dotnet cli generator generated following line in `Program.cs` 
 
