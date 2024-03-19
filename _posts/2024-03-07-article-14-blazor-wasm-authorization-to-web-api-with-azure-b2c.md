@@ -60,7 +60,7 @@ dotnet new blazorwasm --auth IndividualB2C --aad-b2c-instance AAD-B2C-INSTANCE -
 |--- |--- |
 |`AAD-B2C-INSTANCE`| Url to the Azure B2C instance - https://TENANT_NAME.b2clogin.com/ |
 |`DOMAIN`| Domain name can be found in Azure Portal in Azure AD B2C **Overview** blade|
-|`SUSI-POLICY`|Name of the user flow used to log in/out users. Flow can be created in Azure AD B2C **User Flows** Blade. See https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-user-flows|pivots=b2c-user-flow#create-a-sign-up-and-sign-in-user-flow for reference.
+|`SUSI-POLICY`|Name of the user flow used to log in/out users. Flow can be created in Azure AD B2C **User Flows** Blade. See [user flows documentation](https://learn.microsoft.com/en-us/azure/active-directory-b2c/tutorial-create-user-flows) for reference.
 |`CLIENT-ID`| Client id of blazor app registration can be found in corresponding app registration's **Overview** blade|
 
 By default, created project is running on localhost's random port. Check the port number in `launchSettings.json` file created under /Properties directory, add `https://localhost:PORT/authentication/login-callback` redirect uri to in blazor app registration's **Authentication** blade.
