@@ -55,6 +55,7 @@ The command below creates blazor WASM application project, pre-configured with A
 ```
 dotnet new blazorwasm --auth IndividualB2C --aad-b2c-instance AAD-B2C-INSTANCE --domain DOMAIN --susi-policy-id SUSI-POLICY --client-id CLIENT-ID --name blazorWASM-application
 ```
+
 |Command placeholder|Description|
 |--- |--- |
 |`AAD-B2C-INSTANCE`| Url to the Azure B2C instance - https://TENANT_NAME.b2clogin.com/ |
