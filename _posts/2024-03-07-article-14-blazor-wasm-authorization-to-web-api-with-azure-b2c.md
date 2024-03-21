@@ -185,7 +185,7 @@ builder.Services.AddScoped(sp => new HttpClient(sp.GetRequiredService<Authorizat
 
 ### In case of System.InvalidOperationException: The inner handler has not been assigned.
 
-If the code causes `System.InvalidOperationException: The inner handler has not been assigned.` exception, it means the dotnet bug reported in https://github.com/dotnet/aspnetcore/issues/38486 is not fixed by the time you are reading this article :(. To fix the error, it is required to create a custom class, which inherits from `AuthorizationMessageHandler` and sets the inner handler. For instance:
+If the code causes `System.InvalidOperationException: The inner handler has not been assigned.` exception, it means the dotnet bug reported in [github.com/dotnet/aspnetcore/issues/38486](https://github.com/dotnet/aspnetcore/issues/38486) is not fixed by the time you are reading this article. To fix the error, it is required to create a custom class, which inherits from `AuthorizationMessageHandler` and sets the inner handler. For instance:
 
 ```csharp
 //WeatherMessageHandler.cs
@@ -206,7 +206,7 @@ public class WeatherMessageHandler : AuthorizationMessageHandler
 }
 ```
 
-Now `WeatherMessageHandler` can be used to instantiate `HttpClient` in `Program.cs`
+Now, `WeatherMessageHandler` can be used to instantiate `HttpClient` in `Program.cs`
 
 ```csharp
 builder.Services.AddScoped(sp => new HttpClient(sp.GetRequiredService<WeatherMessageHandler>())
