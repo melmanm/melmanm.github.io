@@ -1,0 +1,58 @@
+<mxfile host="Electron" modified="2024-04-17T18:25:38.623Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.2.5 Chrome/120.0.6099.109 Electron/28.1.0 Safari/537.36" etag="yYAZ-CKaYP_J6b0HEOSd" version="24.2.5" type="device">
+  <diagram name="Page-1" id="oISnozz1s6xhpaJ3IlkI">
+    <mxGraphModel dx="1242" dy="808" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-1" value="AuthenticationMiddleware.Invoke" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="150" width="360" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-2" value="AuthenticationService.AuthenticateAsync" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="250" width="250" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="uU8ZkwGqCE0AJP7FJ79k-3" target="uU8ZkwGqCE0AJP7FJ79k-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-3" value="result = AuthenticationHandler.AuthenticateAsync" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="340" width="310" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-4" value="context.User = result.Principal" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="170" y="420" width="260" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-5" value="new ClaimsPincipal" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="300" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-7" value="Success" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="445" y="338" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-9" value="AuthorizationMiddleware.Invokie" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="630" width="340" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-10" value="policies" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="730" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="580" y="855" as="sourcePoint" />
+            <mxPoint x="640" y="880" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-11" value="IAuthorizationMiddlewareResultHandler.HandleAsync" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="180" y="820" width="410" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-12" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="590" y="850" as="sourcePoint" />
+            <mxPoint x="640" y="800" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-13" value="Forbid" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="640" y="770" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="uU8ZkwGqCE0AJP7FJ79k-14" value="Challange" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="650" y="860" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
