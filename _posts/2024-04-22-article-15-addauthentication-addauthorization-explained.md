@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "asp.net AddAuthentication and AddAuthorization explained"
+title: "ASP.NET AddAuthentication and AddAuthorization explained"
 categories: misc
 tags:
 - dotnet
 - webapi
 - OAuth
-- dotnet
 - .NET
 - C#
+- ASP.NET
 cover-img: /assets/img/article15/cover-image.png
 ---
 
