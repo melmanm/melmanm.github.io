@@ -9,7 +9,7 @@ tags:
 - .NET
 - C#
 - ASP.NET
-cover-img: /assets/img/article15/cover-image.svg
+cover-img: /assets/img/article15/cover-image.png
 ---
 
 In this article I will describe the concepts of authentication and authorization in ASP.NET, and why it still can be confusing, even knowing authentication and authorization concepts.
