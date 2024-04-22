@@ -32,7 +32,6 @@ The difference between Authentication and Authorization is in general:
  * Authentication - process of determining user's (or client in general) identity
  * Authorization - process of determining if user's (or client in general) has an access to specific asset
 
-
 ## AddAuthentication()
 
 ASP.NET authentication is based on, what is called, `scheme`. Scheme can be considered as a specific way of authentication; specific way of how user (or api client in general) proves its identity to ASP.NET application and how the application collects identity data related with the user (or api client in general).
