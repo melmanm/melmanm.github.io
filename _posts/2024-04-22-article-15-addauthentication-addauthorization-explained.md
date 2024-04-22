@@ -185,7 +185,7 @@ Then the framework requires user to be authenticated via default authentication 
 
 ---
 
-![asp.net-auth](/assets/img/article15/cover-image.png)
+![asp.net-auth](/assets/img/article15/cover-image-big.png)
 
 ---
 
