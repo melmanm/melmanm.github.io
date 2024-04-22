@@ -22,6 +22,9 @@ In this article I will describe the concepts of authentication and authorization
   - [Authentication scheme to protect the endpoint](#authentication-scheme-to-protect-the-endpoint)
 - [AddAuthorization()](#addauthorization)
   - [Forbid and Challenge](#forbid-and-challenge)
+    - [What happens if policy is not fulfilled?](#what-happens-if-policy-is-not-fulfilled)
+    - [What happens if policy requires authenticated user, but there is none?](#what-happens-if-policy-requires-authenticated-user-but-there-is-none)
+    - [What happens if endpoint has `RequireAuthorization()` extension method with no policy specified?](#what-happens-if-endpoint-has-requireauthorization-extension-method-with-no-policy-specified)
 
 ## In general
 
@@ -165,21 +168,20 @@ Seems straightforward, right?
 
 Let's make a slightly more complex
 
-**What happens if policy is not fulfilled?**
+#### What happens if policy is not fulfilled?
 
-In such case framework makes use of the `IAuthenticationHandler` (related with authentication scheme) and its `ForbidAsync` method. 
+The framework makes use of the `IAuthenticationHandler` (related with authentication scheme) and its `ForbidAsync` method. 
 Yes! In case of failed authorization, ASP.NET uses authentication scheme handler to process it O.o. `ForbidAsync` usually returns just `Unauthorized` HTTP result code.
 
-**What happens if policy requires authenticated user, but there is none?**
+#### What happens if policy requires authenticated user, but there is none?
 
 We can find ourselves in such situations due to two reasons
-1. There is no default authentication scheme specified
-In this case `AuthorizationMiddleware` just tries to perform `AuthenticateAsync()` method from `IAuthenticationHandler` , which corresponds with the authentication scheme.
-2. There is default scheme specified, but authentication in `AuthenticationMiddleware` failed.
+1. **There is no default authentication scheme specified.** In this case `AuthorizationMiddleware` just tries to perform `AuthenticateAsync()` method from `IAuthenticationHandler` , which corresponds with the authentication scheme.
+1. **There is default scheme specified, but authentication in `AuthenticationMiddleware` failed.**
 In this case `AuthorizationMiddleware` performs `ChallengeAsync` method from `IAuthenticationHandler`, which corresponds with the scheme. `ChallengeAsync` usually re-tries authentication, and returns `Unauthenticated` HTTP status code if it fails again.
 
-**What happens if endpoint has `RequireAuthorization()` extension method with no policy specified?**
-In such case the framework requires user to be authenticated via default authentication scheme. So default authentication scheme needs to be specified. If there is no default authentication scheme following exception is thrown, and returned to the client with 500 Http status code:
+#### What happens if endpoint has `RequireAuthorization()` extension method with no policy specified?
+Then the framework requires user to be authenticated via default authentication scheme. So default authentication scheme needs to be specified. If there is no default authentication scheme following exception is thrown, and returned to the client with 500 Http status code:
 `System.InvalidOperationException: No authenticationScheme was specified, and there was no DefaultChallengeScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions).`
 
 
