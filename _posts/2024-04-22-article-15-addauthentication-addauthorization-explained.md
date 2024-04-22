@@ -12,7 +12,7 @@ tags:
 cover-img: /assets/img/article15/cover-image.png
 ---
 
-In this article I will describe how to add authentication and authorization to asp.net project, and why it still can be confusing, even knowing authentication and authorization concepts.
+In this article I will describe the concepts of authentication and authorization in ASP.NET, and why it still can be confusing, even knowing authentication and authorization concepts.
 
 
 ## Table of Contents <!-- omit from toc -->
