@@ -9,11 +9,11 @@ tags:
 - .NET
 - C#
 - ASP.NET
-cover-img: /assets/img/article15/cover-image.png
+cover-img: /assets/img/article15/cover-image.svg
 ---
+![asp.net-auth](/assets/img/article15/cover-image.svg)
 
 In this article I will describe the concepts of authentication and authorization in ASP.NET, and why it still can be confusing, even knowing authentication and authorization concepts.
-
 
 ## Table of Contents <!-- omit from toc -->
 - [In general](#in-general)
@@ -25,6 +25,7 @@ In this article I will describe the concepts of authentication and authorization
     - [What happens if policy is not fulfilled?](#what-happens-if-policy-is-not-fulfilled)
     - [What happens if policy requires authenticated user, but there is none?](#what-happens-if-policy-requires-authenticated-user-but-there-is-none)
     - [What happens if endpoint has `RequireAuthorization()` extension method with no policy specified?](#what-happens-if-endpoint-has-requireauthorization-extension-method-with-no-policy-specified)
+
 
 ## In general
 
