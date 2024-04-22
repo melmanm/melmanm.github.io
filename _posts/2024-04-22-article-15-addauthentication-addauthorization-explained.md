@@ -11,7 +11,6 @@ tags:
 - ASP.NET
 cover-img: /assets/img/article15/cover-image.svg
 ---
-![asp.net-auth](/assets/img/article15/cover-image.svg)
 
 In this article I will describe the concepts of authentication and authorization in ASP.NET, and why it still can be confusing, even knowing authentication and authorization concepts.
 
@@ -185,7 +184,7 @@ In this case `AuthorizationMiddleware` performs `ChallengeAsync` method from `IA
 Then the framework requires user to be authenticated via default authentication scheme. So default authentication scheme needs to be specified. If there is no default authentication scheme following exception is thrown, and returned to the client with 500 Http status code:
 `System.InvalidOperationException: No authenticationScheme was specified, and there was no DefaultChallengeScheme found. The default schemes can be set using either AddAuthentication(string defaultScheme) or AddAuthentication(Action<AuthenticationOptions> configureOptions).`
 
+---
 
-
-
+![asp.net-auth](/assets/img/article15/cover-image.svg)
 
