@@ -40,7 +40,7 @@ For instance, ASP.NET MVC application, usually involves a user who proves his/he
 
 However, in case of standalone ASP.NET Web API, authentication scheme is used to validate and collect some information related with the client who, calls the API. For instance, if the client application attaches OAuth access token within the request to Web API, authentication scheme is used to validate the token and collect data included in the token. This approach can be confusing, since OAuth access tokens are used by API client to prove, that client has **authorization** to access some assets (API endpoints in general). But even in such case, access token is validated using authentication scheme.
 
-Now let's focus on the scheme itself. Each authentication scheme should have unique name. Moreover, it should provide an implementation of `IAuthenticationHandler` of. `IAuthenticationHandler` interfaces includes following methods
+Now let's focus on the scheme itself. Each authentication scheme should have unique name. Moreover, it should provide an implementation of `IAuthenticationHandler`. `IAuthenticationHandler` interfaces includes following methods
 
 ```csharp
 namespace Microsoft.AspNetCore.Authentication
@@ -65,7 +65,7 @@ namespace Microsoft.AspNetCore.Authentication
 Just to make easier to understand, let's map it to real life example:
 * `ClaimPrincipal` is can be an user, a person who has many ways to proof his/her identity
 * `ClaimIdentity` is a single way of how person can proof his/her identity, for instance by presenting ID, passport or driving license
-* `Claim` single information included in `ClaimIdentity`. For instance, considering passport as `ClaimIdentity`, the claim could be `name:John`,`surname:Doe`,`Citizenship:Poland`,`NumberOfVisas:3`.
+* `Claim` single information included in `ClaimIdentity`. For instance, considering passport as `ClaimIdentity`, the claim could be `name:John`,`surname:Doe`, `Citizenship:Poland`, `NumberOfVisas:3`.
 
 `AuthenticateAsync()` method is called in `AuthenticationMiddleware`, which is executed before client request reaches Web API's endpoint.
 
