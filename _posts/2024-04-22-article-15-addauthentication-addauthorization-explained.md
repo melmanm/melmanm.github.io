@@ -84,7 +84,7 @@ builder.Services
 
 > Before dotnet 7, it was required to specify default authentication scheme name in `AddAuthentication` method parameter. Since dotnet 7, if there is only one registered schema, it is treated as default. (Read more in [documentation](https://learn.microsoft.com/en-us/dotnet/core/compatibility/aspnet-core/7.0/default-authentication-scheme)). **Authentication middleware verifies the user (or client) identity using only default authentication scheme.**
 
-It is very important to be aware, that if there is no default scheme specified and there are more then one authentication schemes specified, AuthenticationMiddleware does not process incoming request by calling scheme's `AddAuthentication()` method.
+It is very important to be aware, that if there is no default scheme specified and there are more then one authentication handler registered, AuthenticationMiddleware does not process incoming request by calling scheme's `AddAuthentication()` method.
 
 ### Authentication scheme to protect the endpoint
 
