@@ -165,7 +165,7 @@ Seems straightforward, right?
 
 ### Forbid and Challenge
 
-Let's make a slightly more complex
+Let's make things slightly more complex
 
 #### What happens if policy is not fulfilled?
 
