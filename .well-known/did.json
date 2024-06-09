@@ -1,9 +1,9 @@
 {
-    "id": "did:web:melman.mankiewicz.github.io",
+    "id": "did:web:melmanm.github.io",
     "@context": [
       "https://www.w3.org/ns/did/v1",
       {
-        "@base": "did:web:melman.mankiewicz.github.io"
+        "@base": "did:web:melmanm.github.io"
       }
     ],
     "service": [
@@ -12,7 +12,7 @@
         "type": "LinkedDomains",
         "serviceEndpoint": {
           "origins": [
-            "https://melman.mankiewicz.github.io/"
+            "https://melmanm.github.io/"
           ]
         }
       },
@@ -28,21 +28,21 @@
     ],
     "verificationMethod": [
       {
-        "id": "#81734c7104474742a757b5b2734a963fvcSigningKey-2eab8",
-        "controller": "did:web:melman.mankiewicz.github.io",
+        "id": "#9cea72ce97ba45bf866ab73fe0c6166avcSigningKey-8839e",
+        "controller": "did:web:melmanm.github.io",
         "type": "JsonWebKey2020",
         "publicKeyJwk": {
           "crv": "P-256",
           "kty": "EC",
-          "x": "mTsBizPzQO1bsWQC-eQuA__f_8hm-VkkSp8-FY_fjgg",
-          "y": "V3c9Fg98eqPIIYWu4DyfsvYlsRS8V0a5iTbhtWSwPZE"
+          "x": "Sw83ikYI7UnMclZVkdyFFFiZhJ2CAHHryPyrHDvUny0",
+          "y": "dSvWPKGHi4K-jLxWacIe5Bi4NnBsQLm7QnCzNcx1QmU"
         }
       }
     ],
     "authentication": [
-      "#81734c7104474742a757b5b2734a963fvcSigningKey-2eab8"
+      "#9cea72ce97ba45bf866ab73fe0c6166avcSigningKey-8839e"
     ],
     "assertionMethod": [
-      "#81734c7104474742a757b5b2734a963fvcSigningKey-2eab8"
+      "#9cea72ce97ba45bf866ab73fe0c6166avcSigningKey-8839e"
     ]
   }
