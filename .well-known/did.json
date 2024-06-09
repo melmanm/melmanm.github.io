@@ -1,1 +1,48 @@
-{"id":"did:web:melmanm.github.io","@context":["https://www.w3.org/ns/did/v1",{"@base":"did:web:melmanm.github.io"}],"service":[{"id":"#linkeddomains","type":"LinkedDomains","serviceEndpoint":{"origins":["https://melmanm.github.io/"]}},{"id":"#hub","type":"IdentityHub","serviceEndpoint":{"instances":["https://hub.did.msidentity.com/v1.0/3b2fdc96-2fc7-42ed-87e4-57c65fd9cae9"]}}],"verificationMethod":[{"id":"#001a6faeb5434593af1bf6c50181705evcSigningKey-0ab2e","controller":"did:web:melmanm.github.io","type":"JsonWebKey2020","publicKeyJwk":{"crv":"P-256","kty":"EC","x":"LRh0CWVwTz2EWXZB21ael8xCGeXl-Ni5tVSsvSTlEg0","y":"aO0C42rX7xBk0BrSHWSs1PI346xJ64x3zFb-j9NjtMg"}}],"authentication":["#001a6faeb5434593af1bf6c50181705evcSigningKey-0ab2e"],"assertionMethod":["#001a6faeb5434593af1bf6c50181705evcSigningKey-0ab2e"]}
+{
+    "id": "did:web:melman.mankiewicz.github.io",
+    "@context": [
+      "https://www.w3.org/ns/did/v1",
+      {
+        "@base": "did:web:melman.mankiewicz.github.io"
+      }
+    ],
+    "service": [
+      {
+        "id": "#linkeddomains",
+        "type": "LinkedDomains",
+        "serviceEndpoint": {
+          "origins": [
+            "https://melman.mankiewicz.github.io/"
+          ]
+        }
+      },
+      {
+        "id": "#hub",
+        "type": "IdentityHub",
+        "serviceEndpoint": {
+          "instances": [
+            "https://hub.did.msidentity.com/v1.0/3b2fdc96-2fc7-42ed-87e4-57c65fd9cae9"
+          ]
+        }
+      }
+    ],
+    "verificationMethod": [
+      {
+        "id": "#81734c7104474742a757b5b2734a963fvcSigningKey-2eab8",
+        "controller": "did:web:melman.mankiewicz.github.io",
+        "type": "JsonWebKey2020",
+        "publicKeyJwk": {
+          "crv": "P-256",
+          "kty": "EC",
+          "x": "mTsBizPzQO1bsWQC-eQuA__f_8hm-VkkSp8-FY_fjgg",
+          "y": "V3c9Fg98eqPIIYWu4DyfsvYlsRS8V0a5iTbhtWSwPZE"
+        }
+      }
+    ],
+    "authentication": [
+      "#81734c7104474742a757b5b2734a963fvcSigningKey-2eab8"
+    ],
+    "assertionMethod": [
+      "#81734c7104474742a757b5b2734a963fvcSigningKey-2eab8"
+    ]
+  }
