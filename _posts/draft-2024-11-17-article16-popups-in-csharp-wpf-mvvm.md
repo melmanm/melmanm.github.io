@@ -47,4 +47,4 @@ Despite obvious simplicity, presented solution has some downsides:
    ![spotify-dialog](/assets/img/article16/spotify-dialog.png)
 * Modal dialog initialization is achieved by setting DataContext's properties. (Of course property initialization could be done by `NewsletterPopupViewModel` constructor, but constructor it is often dedicated for dependency injection, especially when modal dialog uses services to perform the business logic). In such case developer who uses `NewsletterPopupViewModel` is not directly instructed if any input properties are required to be set to initialize modal dialog. Moreover it is hard to distinguish which properties are required, and which are optional. 
 * Parent window ViewModel becomes responsible for instantiating modal dialog's View. or at least holds modal dialog's View reference, which is questionable practice in MVVM pattern.
-* `ShowDialog`  will block the UI thread, There is no `ShowDialogAsync` method on available in WPF.
+* `ShowDialog` will block the UI thread, There is no `ShowDialogAsync` method on available in WPF.
