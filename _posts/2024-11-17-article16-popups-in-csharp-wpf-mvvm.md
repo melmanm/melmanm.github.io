@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Yet another way to implement modal dialogs in WPF MVVM"
+title: "Yet another way to implement modal dialogs in WPF using MVVM pattern"
 categories: misc
 tags:
 - dotnet
