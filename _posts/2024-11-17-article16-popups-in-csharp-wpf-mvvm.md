@@ -10,12 +10,25 @@ tags:
 - C#
 - desktop
 - Windows
-cover-img: /assets/img/article15/cover-image.png
+cover-img: /assets/img/article16/cover-image.png
 ---
 
 In this article I will present `pure` MVVM approach to implement modal dialogs in WPF applications. 
 
 The complete code, including example, is available at [my github](https://github.com/melmanm/FlatWpfDialog).
+
+The code presented in this article uses [CommunityToolkit.Mvvm](https://www.nuget.org/packages/CommunityToolkit.Mvvm) nuget package, but general concepts are not dependant on it.
+
+## Table of contents <!-- omit from toc -->
+- [modal dialog, popup, message box](#modal-dialog-popup-message-box)
+- [Motivation](#motivation)
+- [Solution](#solution)
+  - [DialogView](#dialogview)
+  - [DialogViewModel](#dialogviewmodel)
+- [Solution Pros](#solution-pros)
+- [Solution Cons](#solution-cons)
+- [Usage](#usage)
+- [Full example](#full-example)
 
 ## modal dialog, popup, message box
 There are some conceptual differences between popup, dialog, message box and modal (very well described at https://medium.com/design-bootcamp/popups-dialogs-tooltips-and-popovers-ux-patterns-2-939da7a1ddcd). In this article I will present interesting approach on how to implement, applications's visual elements displayed on the top of the user interface, which require user interaction. I will refer them as **modal dialogs**. 
@@ -52,7 +65,7 @@ Despite obvious simplicity, presented solution has some downsides:
 * `Widndow.ShowDialog()` returns `bool?` based on the shown Window's `DialogResult` property. In cases, when modal dialog returns more complex result, it needs to be stored in dialog's DataContext, so it can be consumed by parent ViewModel after modal dialog is closed. There are also some use cases where popup returns more data than just the result.
 * Displaying modal as separate window, often doesn't align with modern designs. Nowadays modal dialogs tend to have flat appearance, embedded into application main window. (See the example of Spotify desktop application below) 
    ![spotify-dialog](/assets/img/article16/spotify-dialog.png)
-* Modal dialog initialization is achieved by setting DataContext's properties. (Of course property initialization could be done by `NewsletterPopupViewModel` constructor, however constructor initialization is often dedicated for dependency injection, especially when modal dialog uses some services to perform the business logic). In such case developer who uses `NewsletterPopupViewModel` is not directly instructed if any input properties are required to be set to initialize modal dialog. Moreover it is hard to distinguish which properties are required, and which are optional. 
+* Modal dialog initialization is achieved by setting DataContext's properties. (Of course property initialization could be done by `NewsletterPopupViewModel` constructor, however constructor initialization is often dedicated for dependency injection, especially when modal dialog uses some services to perform the business logic). In such case developer who uses `NewsletterPopupViewModel` is not directly instructed if any input properties are required to be set to initialize modal dialog. Moreover it is hard to distinguish which properties are required, and which are optional.
 * Parent window ViewModel becomes responsible for instantiating modal dialog's View (or at least holds modal dialog's View reference), which is questionable practice in MVVM pattern.
 * `ShowDialog` will block the UI thread, There is no `ShowDialogAsync` method on available in WPF.
 
@@ -95,6 +108,7 @@ The main element of the proposal is base modal dialog UserControl (`DialogView.x
     </Grid>
 </UserControl>
 ```
+
 Using DataTemplates, `DialogView.xaml` renders actual dialog content, based on content ViewModel type, specified in `DialogView.xaml` DataContext.
 
 `DialogView` can be used as the last element of MainWindow View.
@@ -112,10 +126,14 @@ Using DataTemplates, `DialogView.xaml` renders actual dialog content, based on c
 
 When `DialogView.xaml`'s DataContext has `IsVisible` property set to `true`, dialog is displayed, on the top of MainWindow's content.
 
+
+![dialog-view-placeholder](/assets/img/article16/dialogview-placeholder.png)
+
+
 ### DialogViewModel
 
-`DialogViewModel.cs` is the DataContext bound to the `DialogView`. It has two crucial properties
-* `bool IsVisible` - bind to UserControl's Visibility - controls if popup is displayed or not
+`DialogViewModel.cs` is the DataContext bound to the `DialogView.xaml`. It has two crucial properties
+* `bool IsVisible` - controls if popup is displayed or not (collapsed)
 * `object? DialogContentViewModel` - ViewModel which represents the DataContext for the dialog content View
 
 Generic dialog can be displayed using `ShowAsync` function 
@@ -150,7 +168,7 @@ public partial class DialogViewModel : ObservableObject
 
 `ShowAsync` method requires some explanation.
 
-It is generic function, which returns object of type `IDialogContentOutput`. `IDialogContentOutput` is just a marker interface, for an implementation representing the result of user interaction with the dialog.
+It is generic function, which returns object of type `IDialogContentOutput`. `IDialogContentOutput` is just a marker interface, for an implementation representing the result of user interaction with the dialog. (It can be used for setting initial dialog properties values.)
 
 ```csharp
 public interface IDialogContentOutput;
@@ -219,7 +237,7 @@ First, lets create a `NewsletterDialogContentView.xaml`:
 </UserControl>
 ```
 
-Next lets think of what should be the newsletter dialog input and output. 
+Next, lets think of what should be the newsletter dialog input and output. 
 
 ```csharp
 public class NewsletterDialogInput(string userEmail) : IDialogContentInput
@@ -236,8 +254,7 @@ public class NewsletterDialogOutput(NewsletterDialogResult dialogResult, string 
 > Remember to mark dialog input with `IDialogContentInput`, and output with `IDialogContentOutput` inteface.
 
 
-
-Now it is the time for ViewModel - `NewsletterDialogContentViewModel.cs`, which implements `IDialogContentViewModel<NewsletterDialogInput, NewsletterDialogOutput>` interface.
+Now, it is the time for ViewModel - `NewsletterDialogContentViewModel.cs`, which implements `IDialogContentViewModel<NewsletterDialogInput, NewsletterDialogOutput>` interface.
 
 ```csharp
 public partial class NewsletterDialogContentViewModel : ObservableObject, IDialogContentViewModel<NewsletterDialogInput, NewsletterDialogOutput>
@@ -288,6 +305,9 @@ public MainWindowViewModel(DialogViewModel dialogViewModel, NewsletterDialogCont
         });
     }
 ```
+
+![newsletter-dialog](/assets/img/article16/newsletter-dialog.png)
+
 
 ## Full example
 
