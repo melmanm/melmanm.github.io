@@ -299,7 +299,7 @@ public MainWindowViewModel(DialogViewModel dialogViewModel, NewsletterDialogCont
     {
         OpenDialogCommand = new AsyncRelayCommand(async () =>
         {
-            var dialogOutput = await dialogViewModel.ShowAsync(newsletterDialogViewModel, new("melmanm@melmanm.github.io"));
+            var dialogOutput = await dialogViewModel.ShowAsync(newsletterDialogViewModel, new ("melmanm@melmanm.github.io"));
             LastDialogResult = dialogOutput.DialogResult;
             LastNewsletterEmailAddress = dialogOutput.NewsletterEmailAddress;
         });
