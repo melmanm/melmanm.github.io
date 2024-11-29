@@ -13,7 +13,7 @@ tags:
 cover-img: /assets/img/article16/cover-image.png
 ---
 
-In this article I will present `pure` MVVM approach to implement modal dialogs in WPF applications. 
+In this article I will present cool, MVVM based, approach to implement modal dialogs in WPF applications. 
 
 The complete code, including example, is available at [my github](https://github.com/melmanm/FlatWpfDialog).
 
