@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Yet another way to implement modal popups and dialogs in WPF MVVM"
+title: "Yet another way to implement modal dialogs in WPF MVVM"
 categories: misc
 tags:
 - dotnet
@@ -13,10 +13,12 @@ tags:
 cover-img: /assets/img/article15/cover-image.png
 ---
 
-In this article I will present `pure` MVVM approach to implement modal popups in WPF applications. 
+In this article I will present `pure` MVVM approach to implement modal dialogs in WPF applications. 
+
+The complete code, including example, is available at [my github](https://github.com/melmanm/FlatWpfDialog).
 
 ## modal dialog, popup, message box
-There are some conceptual differences between popup, dialog, message box and modal (very well described at https://medium.com/design-bootcamp/popups-dialogs-tooltips-and-popovers-ux-patterns-2-939da7a1ddcd). In this article I will focus on applications's visual elements displayed on the top of the user interface, which require user interaction. I will refer them as **modal dialogs**. 
+There are some conceptual differences between popup, dialog, message box and modal (very well described at https://medium.com/design-bootcamp/popups-dialogs-tooltips-and-popovers-ux-patterns-2-939da7a1ddcd). In this article I will present interesting approach on how to implement, applications's visual elements displayed on the top of the user interface, which require user interaction. I will refer them as **modal dialogs**. 
 
 ## Motivation
 Over the time I saw multiple implementations and ideas on how to deal with modal dialog in WPF application. 
@@ -56,11 +58,13 @@ Despite obvious simplicity, presented solution has some downsides:
 
 ## Solution
 
+To address the downsides of above implementation, I came up with following solution.
+
 ### DialogView
 
-The main element of the solution is base modal dialog UserControl (`DialogView.xaml`) and its generic ViewModel - (`DialogViewModel.cs`). 
+The main element of the proposal is base modal dialog UserControl (`DialogView.xaml`) and its generic ViewModel - (`DialogViewModel.cs`). 
 
-`DialogView.xaml` is a is a visual placeholder for the popup content.
+`DialogView.xaml` is just is a visual placeholder for the popup content.
 
 ```xml
 <UserControl x:Class="FlatWpfDialog.Views.DialogView"
@@ -91,7 +95,9 @@ The main element of the solution is base modal dialog UserControl (`DialogView.x
     </Grid>
 </UserControl>
 ```
-`DialogView` can be now used as the last element of MainWindow View.
+Using DataTemplates, `DialogView.xaml` renders actual dialog content, based on content ViewModel type, specified in `DialogView.xaml` DataContext.
+
+`DialogView` can be used as the last element of MainWindow View.
 
 ```xml
 <Window ..>
@@ -104,13 +110,13 @@ The main element of the solution is base modal dialog UserControl (`DialogView.x
 </Window>
 ```
 
-When `DialogViewModel`, bound to the `DialogView` has `IsVisible` property set to `true`, the popup is displayed.
+When `DialogView.xaml`'s DataContext has `IsVisible` property set to `true`, dialog is displayed, on the top of MainWindow's content.
 
 ### DialogViewModel
 
-`DialogViewModel.cs`,  bound to above `DialogView`, has two crucial properties
+`DialogViewModel.cs` is the DataContext bound to the `DialogView`. It has two crucial properties
 * `bool IsVisible` - bind to UserControl's Visibility - controls if popup is displayed or not
-* `object? DialogContentViewModel` - ViewModel which represents the DataContext for the View that will be displayed as the `DialogView` content (since `DialogView` can be treated as a placeholder for dialog content View)
+* `object? DialogContentViewModel` - ViewModel which represents the DataContext for the dialog content View
 
 Generic dialog can be displayed using `ShowAsync` function 
 
@@ -144,9 +150,19 @@ public partial class DialogViewModel : ObservableObject
 
 `ShowAsync` method requires some explanation.
 
-It is generic function, which returns object of type `IDialogContentOutput`. `IDialogContentOutput` is just a marker interface, for an implementation representing the result of interacting with the dialog.
+It is generic function, which returns object of type `IDialogContentOutput`. `IDialogContentOutput` is just a marker interface, for an implementation representing the result of user interaction with the dialog.
 
-As an input it takes the implementation of `IDialogContentInput` placeholder interface, which represents the input to the dialog. Additionally it takes the ViewModel representing the DataContext of the actual content View, which will be displayed in the `DialogView`. Passed ViewModel needs to implement `IDialogContentViewModel<TInput, TOutput>` interface. 
+```csharp
+public interface IDialogContentOutput;
+```
+
+As the first input argument it takes the implementation of `IDialogContentInput` placeholder interface, which represents the input to the dialog. 
+
+```csharp
+public interface IDialogContentOutput;
+```
+
+Another `ShowAsync`  input argument is the ViewModel representing the DataContext of the actual content View, which will be displayed in the `DialogView`. Passed ViewModel needs to implement `IDialogContentViewModel<TInput, TOutput>` interface. 
 
 ```csharp
 public interface IDialogContentViewModel<TInput, TOutput> where TInput : IDialogContentInput where TOutput : IDialogContentOutput
@@ -154,25 +170,125 @@ public interface IDialogContentViewModel<TInput, TOutput> where TInput : IDialog
     void Initialize(TInput parameters, TaskCompletionSource<TOutput> taskCompletionSource);
 }
 ```
-`IDialogContentViewModel` defines `Initialize` method which takes the dialog content input, and `TaskCompletionSource` that can return and output. 
+`IDialogContentViewModel` defines `Initialize` method which takes the dialog content input, and `TaskCompletionSource` that can return an output. 
 
 Thanks to `TaskCompletionSource` usage, the implementation of `IDialogContentViewModel` can set the result using 
 `TaskCompletionSource.SetResult<T>(T result)` method. Until that happens `DialogViewModel` waits for the result asynchronously using `TaskCompletionSource.Task.WaitAsync(CancellationToken ct)` method.
 
 The logic of `ShowAsync` method can be summarized in following points
-* make dialog visible
-* initialize content ViewModel with input values, and provide `TaskCompletionSource`
-* wait until `TaskCompletionSource` is set with content output
-* hide dialog
+* make the modal dialog visible
+* initialize modal dialog content ViewModel with input values, and provide `TaskCompletionSource` to it
+* wait until `TaskCompletionSource` is set, by the content view model, providing the output
+* hide the modal dialog
 * return dialog output
-
-> The complete code, including Newsletter modal dialog example, is available at [my github](https://github.com/melmanm/FlatWpfDialog).
 
 ## Solution Pros
 
-* Modal dialog input and output is clearly defined
+* Modal dialogs input and output is clearly defined
+* `ShowAsync` method returns user defined dialog output, the output type is specific for each dialog
 * UI thread is not blocked, since dialog waits for the interaction output asynchronously
 
 ## Solution Cons
 
 * ViewModel - the DataContext of the dialog content View - is not obligated to call `TaskCompletionSource.SetResult<T>(T result)` on the `TaskCompletionSource` passed in `Initialize` function. In result function might be never called, leaving the dialog in open state.
+
+## Usage
+
+Having base code in place, lets go back to the original example and create the newsletter dialog.
+
+First, lets create a `NewsletterDialogContentView.xaml`:
+
+```xml
+<UserControl x:Class="FlatWpfDialog.Views.NewsletterDialogContentView"
+    ...>
+    <UserControl.Resources>
+
+    </UserControl.Resources>
+    <StackPanel>
+        <StackPanel>
+            <Label FontSize="14" FontWeight="Bold">Would you like ty sign up for newsletter?</Label>
+            <Label>newsletter will be sent to below email:</Label>
+            <TextBox Text="{Binding UserEmail}" Margin="5"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Sign Up" Command="{Binding SignUpCommand}" />
+                <Button Content="Dissmiss" Command="{Binding DismissCommand}" />
+                <Button Content="Remind me later" Command="{Binding RemindLaterCommand}"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>
+```
+
+Next lets think of what should be the newsletter dialog input and output. 
+
+```csharp
+public class NewsletterDialogInput(string userEmail) : IDialogContentInput
+{
+    public string UserEmail { get; } = userEmail;
+}
+
+public class NewsletterDialogOutput(NewsletterDialogResult dialogResult, string newsletterEmailAddress) : IDialogContentOutput
+{
+    public NewsletterDialogResult DialogResult { get; } = dialogResult;
+    public string NewsletterEmailAddress { get; } = newsletterEmailAddress;
+}
+```
+> Remember to mark dialog input with `IDialogContentInput`, and output with `IDialogContentOutput` inteface.
+
+
+
+Now it is the time for ViewModel - `NewsletterDialogContentViewModel.cs`, which implements `IDialogContentViewModel<NewsletterDialogInput, NewsletterDialogOutput>` interface.
+
+```csharp
+public partial class NewsletterDialogContentViewModel : ObservableObject, IDialogContentViewModel<NewsletterDialogInput, NewsletterDialogOutput>
+{
+    private TaskCompletionSource<NewsletterDialogOutput>? _tcs;
+
+    [ObservableProperty]
+    private string _userEmail = string.Empty;
+
+    public ICommand? SignUpCommand { get; private set; } = null;
+    public ICommand? DismissCommand { get; private set; } = null;
+    public ICommand? RemindLaterCommand { get; private set; } = null;
+
+    public NewsletterDialogContentViewModel()
+    {
+        SignUpCommand = new RelayCommand(() => /*buisness logic can go here;*/ _tcs?.SetResult(new(NewsletterDialogResult.SignUp, UserEmail)));
+        DismissCommand = new RelayCommand(() => /*buisness logic can go here;*/ _tcs?.SetResult(new(NewsletterDialogResult.Dismiss, UserEmail)));
+        RemindLaterCommand = new RelayCommand(() => /*buisness logic can go here;*/ _tcs?.SetResult(new(NewsletterDialogResult.RemidLater, UserEmail)));
+    }
+
+    public void Initialize(NewsletterDialogInput parameters, TaskCompletionSource<NewsletterDialogOutput> tcs)
+    {
+        UserEmail = parameters.UserEmail;
+
+        _tcs = tcs;
+    }
+}
+```
+
+Now, lets go back to generic `DialogView.xaml` and register the DataTemplate for newsletter dialog content
+
+```xml
+<DataTemplate DataType="{x:Type viewModels:NewsletterDialogContentViewModel}">
+    <views:NewsletterDialogContentView/>
+</DataTemplate>
+```
+
+Finally, newsletter modal dialog can be shown using  `ModalDialog`'s `ShowAsync` method. For instance
+
+```csharp
+public MainWindowViewModel(DialogViewModel dialogViewModel, NewsletterDialogContentViewModel newsletterDialogViewModel)
+    {
+        OpenDialogCommand = new AsyncRelayCommand(async () =>
+        {
+            var dialogOutput = await dialogViewModel.ShowAsync(newsletterDialogViewModel, new("melmanm@melmanm.github.io"));
+            LastDialogResult = dialogOutput.DialogResult;
+            LastNewsletterEmailAddress = dialogOutput.NewsletterEmailAddress;
+        });
+    }
+```
+
+## Full example
+
+The complete code, including Newsletter modal dialog example, is available at [my github](https://github.com/melmanm/FlatWpfDialog).
