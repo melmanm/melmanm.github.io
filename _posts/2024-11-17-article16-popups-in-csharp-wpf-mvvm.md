@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Yet another way to implement modal dialogs in WPF using MVVM pattern"
+title: "Yet another way of implementing modal dialogs in WPF using MVVM pattern"
 categories: misc
 tags:
 - dotnet
@@ -13,11 +13,13 @@ tags:
 cover-img: /assets/img/article16/cover-image.png
 ---
 
-In this article, I will share a practical, MVVM-based approach to implementing modal dialogs in WPF applications.
+In this article, I will share interesting and practical, MVVM-based, approach to modal dialogs implementation in WPF applications.
 
 Presented code, including example, is available at [my github](https://github.com/melmanm/FlatWpfDialog).
 
 Presented code, implements MVVM pattern using [CommunityToolkit.Mvvm](https://www.nuget.org/packages/CommunityToolkit.Mvvm) nuget package, but general concepts are not dependant on it.
+
+![cover-image](/assets/img/article16/cover-image.png)
 
 ## Table of contents <!-- omit from toc -->
 - [modal dialog, popup, message box](#modal-dialog-popup-message-box)
@@ -34,9 +36,9 @@ Presented code, implements MVVM pattern using [CommunityToolkit.Mvvm](https://ww
 There are some conceptual differences between popup, dialog, message box and modal (very well described at [https://medium.com/design-bootcamp/popups-dialogs-tooltips-and-popovers-ux-patterns-2-939da7a1ddcd](https://medium.com/design-bootcamp/popups-dialogs-tooltips-and-popovers-ux-patterns-2-939da7a1ddcd). In this article I will present interesting approach on how to implement, applications's visual elements displayed on the top of the user interface, which require user interaction. I will refer them as **modal dialogs**. 
 
 ## Motivation
-Over the time I saw multiple implementations and ideas on how to deal with modal dialog in WPF application. 
+Over the time I've seen multiple implementations and ideas on how to deal with modal dialog in WPF application. 
 
-Lets consider a requirement to display a newsletter modal popup, which offers newsletter sign up. User can specify the email address for newsletter, but by default user's current email is used. Additionally, user has a possibility to chose `remind me later`, or `dismiss` options. Assuming the `NewsletterPopupView` is responsible for executing the sign up logic - the simplest approach to display the modal dialog would be:
+Lets consider a requirement to display a newsletter modal popup, which offers newsletter sign up, where user can specify the email address for newsletter (by default user's current email is used). Additionally, user has a possibility to chose `remind me later`, or `dismiss` options. Assuming the `NewsletterPopupView` is responsible for executing the sign up logic - the simplest approach to display the modal dialog would be:
 
 ```csharp
 //MainViewModel
@@ -62,7 +64,7 @@ if(popupView.ShowDialog())
 ```
 
 Despite obvious simplicity, presented solution has some downsides:
-* `Widndow.ShowDialog()` returns `bool?` based on the shown Window's `DialogResult` property. In cases, when modal dialog returns more complex result, it needs to be stored in dialog's DataContext, so it can be consumed by parent ViewModel after modal dialog is closed. There are also some use cases where popup returns more data than just the result.
+* `Widndow.ShowDialog()` returns `bool?` based on shown Window's `DialogResult` property. In cases, when modal dialog returns more complex result, it needs to be stored in dialog's DataContext, so it can be consumed by parent ViewModel after modal dialog is closed. There are also some use cases where popup returns more data than just the result.
 * Displaying modal as separate window, often doesn't align with modern designs. Nowadays modal dialogs tend to have flat appearance, embedded into application main window. (See the example of Spotify desktop application below) 
    ![spotify-dialog](/assets/img/article16/spotify-dialog.png)
 * Modal dialog initialization is achieved by setting DataContext's properties. (Of course property initialization could be done by `NewsletterPopupViewModel` constructor, however constructor initialization is often dedicated for dependency injection, especially when modal dialog uses some services to perform the business logic). In such case developer who uses `NewsletterPopupViewModel` is not directly instructed if any input properties are required to be set to initialize modal dialog. Moreover it is hard to distinguish which properties are required, and which are optional.
@@ -292,7 +294,7 @@ Now, lets go back to generic `DialogView.xaml` and register the DataTemplate for
 </DataTemplate>
 ```
 
-Finally, newsletter modal dialog can be shown using  `ModalDialog`'s `ShowAsync` method. For instance
+Finally, newsletter modal dialog can be shown using  `ModalDialog`'s `ShowAsync` method. For instance:
 
 ```csharp
 public MainWindowViewModel(DialogViewModel dialogViewModel, NewsletterDialogContentViewModel newsletterDialogViewModel)
