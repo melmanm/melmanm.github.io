@@ -13,7 +13,7 @@ tags:
 cover-img: /assets/img/article16/cover-image.png
 ---
 
-In this article I will present cool, MVVM based, approach to implement modal dialogs in WPF applications. 
+In this article I will present cool, MVVM based, approach to implementing modal dialogs in WPF applications. 
 
 The complete code, including example, is available at [my github](https://github.com/melmanm/FlatWpfDialog).
 
@@ -31,7 +31,7 @@ The code presented in this article uses [CommunityToolkit.Mvvm](https://www.nuge
 - [Full example](#full-example)
 
 ## modal dialog, popup, message box
-There are some conceptual differences between popup, dialog, message box and modal (very well described at https://medium.com/design-bootcamp/popups-dialogs-tooltips-and-popovers-ux-patterns-2-939da7a1ddcd). In this article I will present interesting approach on how to implement, applications's visual elements displayed on the top of the user interface, which require user interaction. I will refer them as **modal dialogs**. 
+There are some conceptual differences between popup, dialog, message box and modal (very well described at [https://medium.com/design-bootcamp/popups-dialogs-tooltips-and-popovers-ux-patterns-2-939da7a1ddcd](https://medium.com/design-bootcamp/popups-dialogs-tooltips-and-popovers-ux-patterns-2-939da7a1ddcd). In this article I will present interesting approach on how to implement, applications's visual elements displayed on the top of the user interface, which require user interaction. I will refer them as **modal dialogs**. 
 
 ## Motivation
 Over the time I saw multiple implementations and ideas on how to deal with modal dialog in WPF application. 
