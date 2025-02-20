@@ -1,0 +1,5 @@
+[{
+  "packageFamilyName" : "6630f70d-7d40-43e8-8d1d-605ac38550c2_8hcjw1znfqt3y",
+  "paths" : [ "/products/*" ],
+  "excludePaths" : [ "/news/*", "/blog/*" ]
+ }]
